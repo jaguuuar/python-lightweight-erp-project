@@ -26,7 +26,16 @@ def start_module():
         None
     """
 
-    # your code
+    customer_relationship_managment_menu =[
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get longest name id",
+        "(6) Get subscribed emails"]
+        
+
+    ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
     pass
 
