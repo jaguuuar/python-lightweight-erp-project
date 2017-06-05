@@ -26,7 +26,15 @@ def start_module():
         None
     """
 
-    # your code
+    store_manager_menu = [
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get counts by manufacturers",
+        "(6) Get average by manufacturer"]
+
+    ui.print_menu("Store manager menu: ", store_manager_menu, "Exit program")
 
     pass
 
