@@ -28,6 +28,15 @@ def start_module():
     """
 
     # you code
+    inventory_manager_menu= [
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get available items",
+        "(6) Get average durability by manufacturers"]
+
+    ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
 
     pass
 
