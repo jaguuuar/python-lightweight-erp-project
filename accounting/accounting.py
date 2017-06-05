@@ -28,8 +28,15 @@ def start_module():
         None
     """
 
-    # you code
+    accounting_manager_menu = [
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Which year max",
+        "(6) Average amount"]
 
+    ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
     pass
 
 
