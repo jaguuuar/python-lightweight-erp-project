@@ -28,8 +28,15 @@ def start_module():
         None
     """
 
-    # your code
+    sales_manager_menu =[
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get lowest price item id",
+        "(6) Get items sold between"]
 
+    ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
     pass
 
 
