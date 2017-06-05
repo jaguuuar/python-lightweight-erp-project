@@ -34,7 +34,7 @@ def start_module():
         "(5) Get counts by manufacturers",
         "(6) Get average by manufacturer"]
 
-    ui.print_menu("Store manager menu: ", store_manager_menu, "Exit program")
+    ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
 
     pass
 
