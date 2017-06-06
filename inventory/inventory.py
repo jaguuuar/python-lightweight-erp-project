@@ -9,6 +9,9 @@
 
 # importing everything you need
 import os
+import sys
+sys.path.append('/home/kamil/Dokumenty/python-lightweight-erp-project-do_you_even_code_bro')
+
 # User interface module
 import ui
 # data manager module
@@ -58,8 +61,11 @@ def add(table):
     Returns:
         Table with a new record
     """
+    inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
+    'Enter purchase date: ', 'Enter durability: ']
 
-    # your code
+    new_record = ui.get_inputs(inputs, 'Add new record')
+    table.append(new_record)
 
     return table
 
@@ -76,7 +82,12 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
+    #inputs = ['Enter id: ']
+    #del_record = ui.get_inputs(inputs, 'Remove record')
+
+    for record in table:
+        if record[0] == id_
+        table.remove(record) 
 
     return table
 
@@ -121,3 +132,9 @@ def get_average_durability_by_manufacturers(table):
     # your code
 
     pass
+
+table = data_manager.get_table_from_file('inventory.csv')
+#ui.get_inputs(list_labels, title)
+print(add(table))
+
+#def string_test()
