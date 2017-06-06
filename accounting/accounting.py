@@ -47,15 +47,15 @@ def start_module():
     elif chose_menu_number == "2":
         add(table)
     elif chose_menu_number == "3":
-        remove(table, ui.get_input(['Enter id: '], 'Remove record'))
+        remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
     elif chose_menu_number == "4":
-        update(table, ui.get_input(['Enter id: '], 'Update record'))
+        update(table, ui.get_inputs(['Enter id: '], 'Update record'))
     elif chose_menu_number == "5":
         which_year_max(table)
     elif chose_menu_number == "6":
         avg_amount(table, year)
     elif chose_menu_number == "0":
-        main.main()
+        pass
     else:
         print("there is no number like that")
     

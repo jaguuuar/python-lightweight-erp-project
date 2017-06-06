@@ -51,7 +51,7 @@ def start_module():
     elif chose_menu_number == "6":
         get_persons_closest_to_average(table)
     elif chose_menu_number == "0":
-        main.main()
+        pass
     else:
         print("there is no number like that")
 

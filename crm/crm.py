@@ -46,15 +46,15 @@ def start_module():
     elif chose_menu_number == "2":
         add(table)
     elif chose_menu_number == "3":
-        remove(table, ui.get_input(['Enter id: '], 'Remove record'))
+        remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
     elif chose_menu_number == "4":
-        update(table, ui.get_input(['Enter id: '], 'Update record'))
+        update(table, ui.get_inputs(['Enter id: '], 'Update record'))
     elif chose_menu_number == "5":
         get_longest_name_id(table)
     elif chose_menu_number == "6":
         get_subscribed_emails(table)
     elif chose_menu_number == "0":
-        main.main()
+        pass
     else:
         print("there is no number like that")
 

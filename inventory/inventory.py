@@ -42,23 +42,26 @@ def start_module():
     chose_menu_number = input()
     table = data_manager.get_table_from_file('inventory/inventory.csv')
 
-
-    if chose_menu_number == "1":
-        show_table(table)
-    elif chose_menu_number == "2":
-        add(table)
-    elif chose_menu_number == "3":
-        remove(table, ui.get_input(['Enter id: '], 'Remove record'))
-    elif chose_menu_number == "4":
-        update(table, ui.get_input(['Enter id: '], 'Update record'))
-    elif chose_menu_number == "5":
-        get_available_items(table)
-    elif chose_menu_number == "6":
-        get_average_durability_by_manufacturers(table)
-    elif chose_menu_number == "0":
-        main.main()
-    else:
-        print("there is no number like that")
+    inventory = True
+    while inventory:
+        if chose_menu_number == "1":
+            show_table(table)
+        elif chose_menu_number == "2":
+            add(table)
+            break
+        elif chose_menu_number == "3":
+            remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+            inventory = False # break i false obie opcje dzialaja, ale wracaja do glownego maina
+        elif chose_menu_number == "4":
+            update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+        elif chose_menu_number == "5":
+            get_available_items(table)
+        elif chose_menu_number == "6":
+            get_average_durability_by_manufacturers(table)
+        elif chose_menu_number == "0":
+            break
+        else:
+            print("there is no number like that")
 
 
 def show_table(table):
