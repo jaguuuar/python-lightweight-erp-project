@@ -1,5 +1,3 @@
-
-
 def print_table(table, title_list):
     """
     Prints table with data. Sample output:
@@ -36,9 +34,7 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
-    # your code
-
-    pass
+    print('{}{}'.format(lable, result))
 
 
 def print_menu(title, list_options, exit_message):
@@ -62,9 +58,11 @@ def print_menu(title, list_options, exit_message):
         This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    #list options from menu without brackets
+    option_from_menu = ("\n ").join(list_options)
 
-    pass
+    print(title, "\n" , option_from_menu, "\n" , exit_message)
+
 
 
 def get_inputs(list_labels, title):
@@ -86,12 +84,15 @@ def get_inputs(list_labels, title):
         List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
+
+
     inputs = []
 
-    # your code
+    print(title)
+    for enter_input in list_labels:
+        inputs.append(input(enter_input))
 
     return inputs
-
 
 # This function displays an error message. (example: Error: @message)
 #
@@ -107,6 +108,7 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
-    # your code
-
-    pass
+    message_error = "Error: @"
+    print('{}{}'.format(message_error, message))
+    
+    #print(message_error + "@" + message)

@@ -37,7 +37,30 @@ def start_module():
         "(6) Average amount"]
 
     ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
+    
+    chose_menu_number = input()
+    table = data_manager.get_table_from_file('accounting/items.csv')
+    
+
+    if chose_menu_number == "1":
+        show_table(table)
+    elif chose_menu_number == "2":
+        add(table)
+    elif chose_menu_number == "3":
+        remove(table, ui.get_input(['Enter id: '], 'Remove record'))
+    elif chose_menu_number == "4":
+        update(table, ui.get_input(['Enter id: '], 'Update record'))
+    elif chose_menu_number == "5":
+        which_year_max(table)
+    elif chose_menu_number == "6":
+        avg_amount(table, year)
+    elif chose_menu_number == "0":
+        main.main()
+    else:
+        print("there is no number like that")
+    
     pass
+
 
 
 def show_table(table):

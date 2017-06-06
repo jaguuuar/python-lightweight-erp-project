@@ -48,13 +48,13 @@ def start_module():
     elif chose_menu_number == "2":
         add(table)
     elif chose_menu_number == "3":
-        remove(table, ui.get_input(['Enter id: '], 'Remove record') )
+        remove(table, ui.get_input(['Enter id: '], 'Remove record'))
     elif chose_menu_number == "4":
-        update(table, id_)
+        update(table, ui.get_input(['Enter id: '], 'Update record'))
     elif chose_menu_number == "5":
-        which_year_max(table)
+        get_available_items(table)
     elif chose_menu_number == "6":
-        avg_amount(table, year)
+        get_average_durability_by_manufacturers(table)
     elif chose_menu_number == "0":
         main.main()
     else:
