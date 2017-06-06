@@ -25,7 +25,6 @@ def make_table(table):
 
     for i in range(len(columns_rows)):
         for element in columns_rows[i]:
-            # len_difference = len(' '*((longests[i]-len(str(element)))))
             len_difference = longests[i] - len(str(element))
             rounded_up = ' '*int(len_difference/2)
 
