@@ -38,7 +38,27 @@ def start_module():
 
     ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
 
-    pass
+
+    chose_menu_number = input()
+    table = data_manager.get_table_from_file('inventory/inventory.csv')
+
+
+    if chose_menu_number == "1":
+        show_table(table)
+    elif chose_menu_number == "2":
+        add(table)
+    elif chose_menu_number == "3":
+        remove(table, ui.get_input(['Enter id: '], 'Remove record') )
+    elif chose_menu_number == "4":
+        update(table, id_)
+    elif chose_menu_number == "5":
+        which_year_max(table)
+    elif chose_menu_number == "6":
+        avg_amount(table, year)
+    elif chose_menu_number == "0":
+        main.main()
+    else:
+        print("there is no number like that")
 
 
 def show_table(table):
@@ -68,7 +88,12 @@ def add(table):
         Table with a new record
     """
 
-    # your code
+    inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
+    'Enter purchase date: ', 'Enter durability: ']
+
+    new_record = ui.get_inputs(inputs, 'Add new record')
+    table.append(new_record)
+
 
     return table
 
@@ -85,7 +110,11 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
+    id_ = ''.join(id_)
+
+    for record in table:
+        if record[0] == id_:
+            table.remove(record)
 
     return table
 
