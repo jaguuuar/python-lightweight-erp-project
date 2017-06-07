@@ -1,4 +1,74 @@
+def make_table(table, title_list):
+
+    table.insert(0, title_list)
+    columns = len(table[0])
+    rows = len(table)
+    columns_rows = []
+    longests = []
+    columns_rows_with_whitespace = []
+
+    for i in range(0, columns):                             # make list with empty lists (it's depend on columns lenght)
+        columns_rows.append([])
+        columns_rows_with_whitespace.append([])
+        for j in range(rows):
+            columns_rows[i].append(table[j][i])                                     # add cells from columns to one list
+
+    for i in range(len(columns_rows)):          # found longest string or number in column and add them to list longests
+
+        highest = len(str(columns_rows[i][0]))
+
+        for element in columns_rows[i]:
+            if highest < len(str(element)):
+                highest = len(str(element))
+        longests.append(highest)
+
+    for i in range(len(columns_rows)):                                  # add whitespaces and '|' to strings/numbers
+        for element in columns_rows[i]:
+            len_difference = longests[i] - len(str(element))
+            rounded_up = ' '*int(len_difference/2)
+
+            if len(str(element)) == longests[i]:
+                element = '|  ' + str(element) + '  |'
+            else:
+                if (longests[i] - len(str(element))) % 2 == 0:
+                    element = '|  ' + rounded_up + str(element) + rounded_up + '  |'
+                else:
+                    element = '|  ' + rounded_up + str(element) + rounded_up + ' ' + '  |'
+            columns_rows_with_whitespace[i].append(element)
+
+    back_to_rows = []
+
+    for i in range(0, rows):
+        back_to_rows.append([])
+
+    for i in range(len(back_to_rows)):                                      # back to list of lists where sublist is row
+        for j in range(len(columns_rows_with_whitespace)):
+            back_to_rows[i].append(columns_rows_with_whitespace[j][i])
+
+    board_lines = []
+
+    for element in longests:                                            # make elements (lines with '-') beetween rows
+        line = '-' + ((4+element) * '-') + '-'
+        board_lines.append(line)
+
+    temp = []
+
+    for i in range(len(back_to_rows)):
+        temp.append(back_to_rows[i])
+        temp.append(board_lines)
+
+    temp.insert(0, board_lines)
+    table = temp
+
+    for row in table:
+        for element in row:
+            print(element, end=' ')
+        print(' ')
+
+
+
 def print_table(table, title_list):
+
     """
     Prints table with data. Sample output:
         /-----------------------------------\
@@ -16,10 +86,8 @@ def print_table(table, title_list):
     Returns:
         This function doesn't return anything it only prints to console.
     """
-
-    # your goes code
-
-    pass
+    # data = [titles] + list(zip(key, values))
+    make_table(table, title_list)
 
 
 def print_result(result, label):
@@ -88,6 +156,7 @@ def get_inputs(list_labels, title):
 
     inputs = []
 
+
     print(title)
     for enter_input in list_labels:
         inputs.append(input(enter_input))
@@ -108,7 +177,34 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
+
     message_error = "Error: @"
     print('{}{}'.format(message_error, message))
-    
+
     #print(message_error + "@" + message)
+
+    pass
+
+####################################################
+# TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
+
+
+def main():
+    '''table = [['1dsa', 'Janusz Kozlowski', 1922234, '123123'], ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 212],
+             ['dkllk7', 'AlbadasSadasd', 1929929921223, 'ewqwe'], ['dkllk798820', 'AlbadasSasdasadasd', 192992992122322, 'dasdsa'],
+             ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 123], ['dakdjhkajhdw', 'Barbra Saasdatreid', '1231', 1991122]]'''
+
+    title_list = ['ID', 'NAME', 'YEAR']
+
+    with open('sales/sales.csv', "r") as file:
+        lines = file.readlines()
+    table = [element.replace("\n", "").split(";") for element in lines]
+
+    print_table(table, title_list)
+
+
+#main()
+
+
+# TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
+####################################################

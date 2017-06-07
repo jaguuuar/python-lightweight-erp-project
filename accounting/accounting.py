@@ -50,6 +50,7 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_accounting = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_accounting = False
@@ -74,14 +75,11 @@ def show_table(table):
 
     Args:
         table: list of lists to be displayed.
-
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    title_list = ['ID', 'NAME', 'YEAR', 'DKKS', 'IOIADS', 'DSA']
+    ui.print_table(table, title_list)
 
 
 def add(table):
