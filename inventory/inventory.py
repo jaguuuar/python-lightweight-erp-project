@@ -45,8 +45,6 @@ def start_module():
             "(6) Get average durability by manufacturers"]
 
         ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
-        #table = data_manager.get_table_from_file('inventory/inventory.csv')
-
 
         chose_menu_number = input()
 
@@ -65,8 +63,10 @@ def start_module():
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
             elif chose_menu_number == "5":
                 get_available_items(table)
+                is_menu_inventory = False
             elif chose_menu_number == "6":
                 get_average_durability_by_manufacturers(table)
+                is_menu_inventory = False
             elif chose_menu_number == "0":
                 is_menu_inventory = False
                 is_not_main_menu = False
@@ -143,10 +143,14 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_items(table):
+    available_items = []
+    for record in table:
+        exceed_year = int(record[3]) + int(record[4])
+        if exceed_year >= 2017:
+            available_items.append(record)
 
-    # your code
+    return available_items
 
-    pass
 
 
 # the question: What are the average durability times for each manufacturer?
@@ -154,14 +158,20 @@ def get_available_items(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
+    manufacturers = []
+    for record in table:
+        if record[2] not in manufacturers:
+            manufacturers.append(record[2])
 
-    # your code
+    average_durability = {}
+    for manufacturer in manufacturers:
+        durability_sum = 0
+        manu_count = 0
+        for record in table:
+            if manufacturer in record:
+                durability_sum += int(record[4])
+                manu_count += 1
 
-    pass
+        average_durability[manufacturer] = durability_sum / manu_count
 
-'''table = data_manager.get_table_from_file('inventory.csv')
-#print(table)
-#add(table)
-print(table)
-print()
-print(remove(table, id_))'''
+    return average_durability
