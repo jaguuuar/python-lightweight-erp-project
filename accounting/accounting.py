@@ -101,24 +101,21 @@ def update(table, id_):
 
     inputs = ['Enter month: ', 'Enter day: ', 'Enter year:', 'Enter type: ', 'Enter amount: ']
     inputs_entered = ui.get_inputs(inputs,'Update your record')
-    print(inputs_entered)
-    #print(inputs_entered[0])
-    #print(inputs_entered[2])
+
 
     for element in table:
         if element[0] == id_:
             for j in range(0,5):
                 element[j+1] = inputs_entered[j]
 
-    #print(table[0][0])
-    #print(id_)
-    #print(table)
+    data_manager.write_table_to_file("customers.csv", table)
+
     return table
 
 
 table = data_manager.get_table_from_file("items.csv")
 us_input = ui.get_inputs(['Enter ID: '],"hello")
-print(update(table, us_input[0]))
+#print(update(table, us_input[0]))
 
 
 

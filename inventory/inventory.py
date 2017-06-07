@@ -10,7 +10,7 @@
 # importing everything you need
 import os
 import sys
-sys.path.append('/home/kamil/Dokumenty/python-lightweight-erp-project-do_you_even_code_bro')
+sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 
 # User interface module
 import ui
@@ -61,13 +61,15 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
-    'Enter purchase date: ', 'Enter durability: ']
+    # inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
+    # 'Enter purchase date: ', 'Enter durability: ']
+    #
+    # new_record = ui.get_inputs(inputs, 'Add new record')
+    # table.append(new_record)
+    #
+    # return table
 
-    new_record = ui.get_inputs(inputs, 'Add new record')
-    table.append(new_record)
-
-    return table
+    pass
 
 
 def remove(table, id_):
@@ -85,12 +87,13 @@ def remove(table, id_):
     #inputs = ['Enter id: ']
     #del_record = ui.get_inputs(inputs, 'Remove record')
 
-    for record in table:
-        if record[0] == id_
-        table.remove(record) 
-
-    return table
-
+    # for record in table:
+    #     if record[0] == id_:
+    #     table.remove(record)
+    #
+    # return table
+    #
+    pass
 
 def update(table, id_):
     """
@@ -104,9 +107,24 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    inputs = ['Enter name of object: ', 'Enter name of manufacturer: ','Enter purhase date: ','Enter durability: ']
+    inputs_entered = ui.get_inputs(inputs,'Update your record')
+
+
+    for element in table:
+        if element[0] == id_:
+            for j in range(0,4):
+                element[j+1] = inputs_entered[j]
+
+    data_manager.write_table_to_file("inventory.csv", table)
 
     return table
+
+''' Above three lines should be deleted at the end of our coding!'''
+
+table = data_manager.get_table_from_file("inventory.csv")
+us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
+print(update(table, us_input[0]))
 
 
 # special functions:
