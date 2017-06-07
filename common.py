@@ -50,6 +50,7 @@ def generate_random(table):
     return generated
 
 
+<<<<<<< HEAD
 
 def insertion_sort(list_to_sort):
     for number in range (1, len(list_to_sort)):
@@ -64,3 +65,20 @@ def insertion_sort(list_to_sort):
 
 
     return list_to_sort
+=======
+def add(table):
+
+    """
+    Asks user for input and adds it into the table.
+
+    Args:
+        table: table to add new record to
+
+    Returns:
+        Table with a new record
+    """
+
+    # your code
+
+    return table
+>>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778

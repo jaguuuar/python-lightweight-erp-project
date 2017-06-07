@@ -8,9 +8,11 @@
 
 # importing everything you need
 import os
+
 #import above is for test
 import sys
 sys.path.append('/home/sylwia/Codecool/TW_after_checkpoint1/TW6/python-lightweight-erp-project-do_you_even_code_bro')
+
 
 # User interface module
 import ui
@@ -32,6 +34,7 @@ def start_module():
         None
     """
 
+    table = data_manager.get_table_from_file('crm/customers.csv')
     is_not_main_menu = True
     while is_not_main_menu:
 
@@ -47,7 +50,7 @@ def start_module():
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('crm/customers.csv')
+
 
         is_menu_crm = True
         while is_menu_crm:
@@ -134,10 +137,24 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    inputs = ['Enter Name and surname: ', 'Enter e-mail: ', 'Is that person subscribed to the newsletter? )(1/0 = yes/not) ']
+    inputs_entered = ui.get_inputs(inputs,'Update your record')
+
+
+    for element in table:
+        if element[0] == id_:
+            for j in range(0,3):
+                element[j+1] = inputs_entered[j]
+
+    data_manager.write_table_to_file("customers.csv", table)
 
     return table
     pass
+
+
+table = data_manager.get_table_from_file("customers.csv")
+us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
+print(update(table, us_input[0]))
 
 
 # special functions:

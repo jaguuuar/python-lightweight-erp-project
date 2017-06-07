@@ -10,6 +10,8 @@
 
 # importing everything you need
 import os
+import sys
+sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -99,6 +101,8 @@ def add(table):
 
     return table
 
+    pass
+
 
 def remove(table, id_):
     """
@@ -116,6 +120,8 @@ def remove(table, id_):
 
     return table
 
+    pass
+
 
 def update(table, id_):
     """
@@ -129,9 +135,24 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    inputs = ['Enter title: ', 'Enter price: ','Enter month: ','Enter day: ','Enter year: ']
+    inputs_entered = ui.get_inputs(inputs,'Update your record')
+
+
+    for element in table:
+        if element[0] == id_:
+            for j in range(0,5):
+                element[j+1] = inputs_entered[j]
+
+    data_manager.write_table_to_file("sales.csv", table)
 
     return table
+
+''' Above three lines should be deleted at the end of our coding!'''
+
+table = data_manager.get_table_from_file("sales.csv")
+us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
+print(update(table, us_input[0]))
 
 
 # special functions:

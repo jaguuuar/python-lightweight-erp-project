@@ -9,6 +9,9 @@
 
 # importing everything you need
 import os
+import sys
+sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+
 # User interface module
 import ui
 # data manager module
@@ -93,7 +96,15 @@ def add(table):
     Returns:
         Table with a new record
     """
+    # inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
+    # 'Enter purchase date: ', 'Enter durability: ']
+    #
+    # new_record = ui.get_inputs(inputs, 'Add new record')
+    # table.append(new_record)
+    #
+    # return table
 
+<<<<<<< HEAD
     inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
 
@@ -102,6 +113,9 @@ def add(table):
 
 
     return table
+=======
+    pass
+>>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
 
 
 def remove(table, id_):
@@ -116,6 +130,7 @@ def remove(table, id_):
         Table without specified record.
     """
 
+<<<<<<< HEAD
     id_ = ''.join(id_)
 
     for record in table:
@@ -123,7 +138,18 @@ def remove(table, id_):
             table.remove(record)
 
     return table
+=======
+    #inputs = ['Enter id: ']
+    #del_record = ui.get_inputs(inputs, 'Remove record')
+>>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
 
+    # for record in table:
+    #     if record[0] == id_:
+    #     table.remove(record)
+    #
+    # return table
+    #
+    pass
 
 def update(table, id_):
     """
@@ -137,9 +163,24 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    inputs = ['Enter name of object: ', 'Enter name of manufacturer: ','Enter purhase date: ','Enter durability: ']
+    inputs_entered = ui.get_inputs(inputs,'Update your record')
+
+
+    for element in table:
+        if element[0] == id_:
+            for j in range(0,4):
+                element[j+1] = inputs_entered[j]
+
+    data_manager.write_table_to_file("inventory.csv", table)
 
     return table
+
+''' Above three lines should be deleted at the end of our coding!'''
+
+table = data_manager.get_table_from_file("inventory.csv")
+us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
+print(update(table, us_input[0]))
 
 
 # special functions:
@@ -165,3 +206,9 @@ def get_average_durability_by_manufacturers(table):
     # your code
 
     pass
+
+table = data_manager.get_table_from_file('inventory.csv')
+#ui.get_inputs(list_labels, title)
+print(add(table))
+
+#def string_test()
