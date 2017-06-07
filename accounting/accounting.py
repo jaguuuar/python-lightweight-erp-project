@@ -40,13 +40,13 @@ def start_module():
             "(6) Average amount"]
 
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
-        
+
         chose_menu_number = input()
         table = data_manager.get_table_from_file('accounting/items.csv')
 
         is_menu_accounting = True
         while is_menu_accounting:
-        
+
 
             if chose_menu_number == "1":
                 show_table(table)
@@ -63,7 +63,7 @@ def start_module():
             elif chose_menu_number == "6":
                 avg_amount(table, year)
             elif chose_menu_number == "0":
-                is_menu_accounting = False 
+                is_menu_accounting = False
                 is_not_main_menu = False
 
 
@@ -94,11 +94,11 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter moth: ', 'Enter day: ',
+    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    table = common.add_record(table, inputs)
 
     return table
-
 
 def remove(table, id_):
     """
@@ -111,8 +111,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 

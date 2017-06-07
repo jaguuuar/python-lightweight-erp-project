@@ -37,10 +37,10 @@ def start_module():
             "(6) Get persons closest to average"]
 
         ui.print_menu("Human resources manager menu: ", human_resources_manager_menu, "(0) Back to main menu")
-        
+
         chose_menu_number = input()
         table = data_manager.get_table_from_file('hr/persons.csv')
-        
+
         is_menu_hr = True
         while is_menu_hr:
 
@@ -59,7 +59,7 @@ def start_module():
             elif chose_menu_number == "6":
                 get_persons_closest_to_average(table)
             elif chose_menu_number == "0":
-                is_menu_hr = False 
+                is_menu_hr = False
                 is_not_main_menu = False
 
 
@@ -90,8 +90,8 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter name: ', 'Enter birth date: ']
+    table = common.add_record(table, inputs)
 
     return table
 
@@ -107,8 +107,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 

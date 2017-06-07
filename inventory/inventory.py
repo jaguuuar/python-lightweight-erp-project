@@ -95,12 +95,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-
     inputs = ['Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
-
     table = common.add_record(table, inputs)
+
     return table
+
 
 def remove(table, id_):
     """
@@ -171,7 +171,6 @@ def get_average_durability_by_manufacturers(table):
             if manufacturer in record:
                 durability_sum += int(record[4])
                 manu_count += 1
-
-        average_durability[manufacturer] = durability_sum / manu_count
+        average_durability[manufacturer] = round(durability_sum / manu_count, 2)
 
     return average_durability
