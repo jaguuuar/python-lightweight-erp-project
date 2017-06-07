@@ -21,7 +21,33 @@ def generate_random(table):
         Random and unique string
     """
 
-    generated = ''
+    #generated = ''
+
+
+    id_list=[]
+    for record in table:
+        id_list.append(record[0])
+
+    while True:
+        generated = []
+        for i in range(2):
+            number = random.randint(0,9)
+            generated.append(str(number))
+            upper = random.choice(string.ascii_uppercase)
+            generated.append(upper)
+            lower = random.choice(string.ascii_lowercase)
+            generated.append(lower)
+            char = random.choice(string.punctuation)
+            while char == ';':
+                char = random.choice(string.punctuation)
+            generated.append(char)
+
+        random.shuffle(generated)
+        generated = ''.join(generated)
+        if generated not in id_list:
+            break
+
+    return generated
 
     # your code
 

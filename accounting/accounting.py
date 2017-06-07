@@ -28,38 +28,43 @@ def start_module():
         None
     """
 
-    accounting_manager_menu = [
-        "(1) Show table",
-        "(2) Add",
-        "(3) Remove",
-        "(4) Update",
-        "(5) Which year max",
-        "(6) Average amount"]
+    is_not_main_menu = True
+    while is_not_main_menu:
 
-    ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
-    
-    chose_menu_number = input()
-    table = data_manager.get_table_from_file('accounting/items.csv')
-    
+        accounting_manager_menu = [
+            "(1) Show table",
+            "(2) Add",
+            "(3) Remove",
+            "(4) Update",
+            "(5) Which year max",
+            "(6) Average amount"]
 
-    if chose_menu_number == "1":
-        show_table(table)
-    elif chose_menu_number == "2":
-        add(table)
-    elif chose_menu_number == "3":
-        remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-    elif chose_menu_number == "4":
-        update(table, ui.get_inputs(['Enter id: '], 'Update record'))
-    elif chose_menu_number == "5":
-        which_year_max(table)
-    elif chose_menu_number == "6":
-        avg_amount(table, year)
-    elif chose_menu_number == "0":
-        pass
-    else:
-        print("there is no number like that")
-    
-    pass
+        ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
+        
+        chose_menu_number = input()
+        table = data_manager.get_table_from_file('accounting/items.csv')
+
+        is_menu_accounting = True
+        while is_menu_accounting:
+        
+
+            if chose_menu_number == "1":
+                show_table(table)
+            elif chose_menu_number == "2":
+                add(table)
+                is_menu_accounting = False
+            elif chose_menu_number == "3":
+                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                is_menu_accounting = False
+            elif chose_menu_number == "4":
+                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+            elif chose_menu_number == "5":
+                which_year_max(table)
+            elif chose_menu_number == "6":
+                avg_amount(table, year)
+            elif chose_menu_number == "0":
+                is_menu_accounting = False 
+                is_not_main_menu = False
 
 
 
