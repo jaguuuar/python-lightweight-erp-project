@@ -26,10 +26,42 @@ def start_module():
         None
     """
 
-    # your code
+    is_not_main_menu = True
+    while is_not_main_menu:
 
-    pass
+        store_manager_menu = [
+            "(1) Show table",
+            "(2) Add",
+            "(3) Remove",
+            "(4) Update",
+            "(5) Get counts by manufacturers",
+            "(6) Get average by manufacturer"]
 
+        ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
+
+        chose_menu_number = input()
+        table = data_manager.get_table_from_file('store/games.csv')
+        
+        is_menu_stores = True
+        while is_menu_store:
+
+            if chose_menu_number == "1":
+                show_table(table)
+            elif chose_menu_number == "2":
+                add(table)
+                is_menu_store = False
+            elif chose_menu_number == "3":
+                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                is_menu_store = False
+            elif chose_menu_number == "4":
+                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+            elif chose_menu_number == "5":
+                get_counts_by_manufacturers(table)
+            elif chose_menu_number == "6":
+                get_average_by_manufacturer(table, manufacturer)
+            elif chose_menu_number == "0":
+                is_menu_store = False 
+                is_not_main_menu = False
 
 def show_table(table):
     """

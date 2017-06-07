@@ -10,7 +10,8 @@
 # importing everything you need
 import os
 import sys
-sys.path.append('/home/kamil/Dokumenty/python-lightweight-erp-project-do_you_even_code_bro')
+import time
+sys.path.append('/home/kamil/Dokumenty/srodda/python-lightweight-erp-project-do_you_even_code_bro')
 
 # User interface module
 import ui
@@ -30,9 +31,45 @@ def start_module():
         None
     """
 
-    # you code
+    table = data_manager.get_table_from_file('inventory/inventory.csv')
 
-    pass
+    is_not_main_menu = True
+    while is_not_main_menu:
+
+        inventory_manager_menu= [
+            "(1) Show table",
+            "(2) Add",
+            "(3) Remove",
+            "(4) Update",
+            "(5) Get available items",
+            "(6) Get average durability by manufacturers"]
+
+        ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
+        #table = data_manager.get_table_from_file('inventory/inventory.csv')
+
+
+        chose_menu_number = input()
+
+        is_menu_inventory = True
+        while is_menu_inventory:
+            if chose_menu_number == "1":
+                show_table(table)
+                is_menu_inventory = False
+            elif chose_menu_number == "2":
+                table = add(table)
+                is_menu_inventory = False
+            elif chose_menu_number == "3":
+                table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                is_menu_inventory = False # break i false obie opcje dzialaja, wraca do inventory menu
+            elif chose_menu_number == "4":
+                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+            elif chose_menu_number == "5":
+                get_available_items(table)
+            elif chose_menu_number == "6":
+                get_average_durability_by_manufacturers(table)
+            elif chose_menu_number == "0":
+                is_menu_inventory = False
+                is_not_main_menu = False
 
 
 def show_table(table):
@@ -45,10 +82,7 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    print(table)
 
 
 def add(table):
@@ -61,14 +95,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
+
+    inputs = ['Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
 
-    new_record = ui.get_inputs(inputs, 'Add new record')
-    table.append(new_record)
-
+    table = common.add_record(table, inputs)
     return table
-
 
 def remove(table, id_):
     """
@@ -81,13 +113,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    #inputs = ['Enter id: ']
-    #del_record = ui.get_inputs(inputs, 'Remove record')
-
-    for record in table:
-        if record[0] == id_
-        table.remove(record) 
+    table = common.remove_record(table, id_)
 
     return table
 
@@ -133,8 +159,9 @@ def get_average_durability_by_manufacturers(table):
 
     pass
 
-table = data_manager.get_table_from_file('inventory.csv')
-#ui.get_inputs(list_labels, title)
-print(add(table))
-
-#def string_test()
+'''table = data_manager.get_table_from_file('inventory.csv')
+#print(table)
+#add(table)
+print(table)
+print()
+print(remove(table, id_))'''
