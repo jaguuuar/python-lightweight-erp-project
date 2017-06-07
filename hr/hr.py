@@ -25,9 +25,35 @@ def start_module():
         None
     """
 
-    # your code
+    human_resources_manager_menu = [
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get oldest person",
+        "(6) Get persons closest to average"]
 
-    pass
+    ui.print_menu("Human resources manager menu: ", human_resources_manager_menu, "(0) Back to main menu")
+    
+    chose_menu_number = input()
+    table = data_manager.get_table_from_file('hr/persons.csv')
+    
+    if chose_menu_number == "1":
+        show_table(table)
+    elif chose_menu_number == "2":
+        add(table)
+    elif chose_menu_number == "3":
+        remove(table, ui.get_input(['Enter id: '], 'Remove record'))
+    elif chose_menu_number == "4":
+        update(table, ui.get_input(['Enter id: '], 'Update record'))
+    elif chose_menu_number == "5":
+        get_oldest_person(table)
+    elif chose_menu_number == "6":
+        get_persons_closest_to_average(table)
+    elif chose_menu_number == "0":
+        pass
+    else:
+        print("there is no number like that")
 
 
 def show_table(table):

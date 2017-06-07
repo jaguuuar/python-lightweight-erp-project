@@ -26,9 +26,37 @@ def start_module():
         None
     """
 
-    # your code
+    customer_relationship_managment_menu =[
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get longest name id",
+        "(6) Get subscribed emails"]
+        
 
-    pass
+    ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
+
+    chose_menu_number = input()
+    table = data_manager.get_table_from_file('crm/customers.csv')
+
+
+    if chose_menu_number == "1":
+        show_table(table)
+    elif chose_menu_number == "2":
+        add(table)
+    elif chose_menu_number == "3":
+        remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+    elif chose_menu_number == "4":
+        update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+    elif chose_menu_number == "5":
+        get_longest_name_id(table)
+    elif chose_menu_number == "6":
+        get_subscribed_emails(table)
+    elif chose_menu_number == "0":
+        pass
+    else:
+        print("there is no number like that")
 
 
 def show_table(table):

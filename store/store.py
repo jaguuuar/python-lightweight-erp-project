@@ -26,9 +26,35 @@ def start_module():
         None
     """
 
-    # your code
+    store_manager_menu = [
+        "(1) Show table",
+        "(2) Add",
+        "(3) Remove",
+        "(4) Update",
+        "(5) Get counts by manufacturers",
+        "(6) Get average by manufacturer"]
 
-    pass
+    ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
+
+    chose_menu_number = input()
+    table = data_manager.get_table_from_file('store/games.csv')
+    
+    if chose_menu_number == "1":
+        show_table(table)
+    elif chose_menu_number == "2":
+        add(table)
+    elif chose_menu_number == "3":
+        remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+    elif chose_menu_number == "4":
+        update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+    elif chose_menu_number == "5":
+        get_counts_by_manufacturers(table)
+    elif chose_menu_number == "6":
+        get_average_by_manufacturer(table, manufacturer)
+    elif chose_menu_number == "0":
+        pass
+    else:
+        print("there is no number like that")
 
 
 def show_table(table):
