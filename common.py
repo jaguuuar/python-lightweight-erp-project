@@ -21,13 +21,51 @@ def generate_random(table):
         Random and unique string
     """
 
-    generated = ''
+    #generated = ''
 
-    # your code
+
+    id_list=[]
+    for record in table:
+        id_list.append(record[0])
+
+    while True:
+        generated = []
+        for i in range(2):
+            number = random.randint(0,9)
+            generated.append(str(number))
+            upper = random.choice(string.ascii_uppercase)
+            generated.append(upper)
+            lower = random.choice(string.ascii_lowercase)
+            generated.append(lower)
+            char = random.choice(string.punctuation)
+            while char == ';':
+                char = random.choice(string.punctuation)
+            generated.append(char)
+
+        random.shuffle(generated)
+        generated = ''.join(generated)
+        if generated not in id_list:
+            break
 
     return generated
 
 
+<<<<<<< HEAD
+
+def insertion_sort(list_to_sort):
+    for number in range (1, len(list_to_sort)):
+        current_number = list_to_sort[number]
+        element = number - 1
+
+    while element >= 0 and list_to_sort[element] > current_number:
+        list_to_sort[element+1] = list_to_sort[element]
+        element -=1
+
+    list_to_sort[element+1] = current_number
+
+
+    return list_to_sort
+=======
 def add(table):
 
     """
@@ -43,3 +81,4 @@ def add(table):
     # your code
 
     return table
+>>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778

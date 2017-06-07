@@ -8,14 +8,20 @@
 
 # importing everything you need
 import os
+
+#import above is for test
 import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+sys.path.append('/home/sylwia/Codecool/TW_after_checkpoint1/TW6/python-lightweight-erp-project-do_you_even_code_bro')
+
+
 # User interface module
 import ui
 # data manager module
 import data_manager
 # common module
 import common
+
+
 
 
 def start_module():
@@ -28,9 +34,44 @@ def start_module():
         None
     """
 
-    # your code
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    is_not_main_menu = True
+    while is_not_main_menu:
 
-    pass
+        customer_relationship_managment_menu =[
+            "(1) Show table",
+            "(2) Add",
+            "(3) Remove",
+            "(4) Update",
+            "(5) Get longest name id",
+            "(6) Get subscribed emails"]
+            
+
+        ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
+
+        chose_menu_number = input()
+
+
+        is_menu_crm = True
+        while is_menu_crm:
+
+            if chose_menu_number == "1":
+                show_table(table)
+            elif chose_menu_number == "2":
+                add(table)
+                is_menu_crm = False
+            elif chose_menu_number == "3":
+                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                is_menu_crm = False
+            elif chose_menu_number == "4":
+                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+            elif chose_menu_number == "5":
+                get_longest_name_id(table)
+            elif chose_menu_number == "6":
+                get_subscribed_emails(table)
+            elif chose_menu_number == "0":
+                is_menu_crm = False 
+                is_not_main_menu = False
 
 
 def show_table(table):
@@ -108,6 +149,7 @@ def update(table, id_):
     data_manager.write_table_to_file("customers.csv", table)
 
     return table
+    pass
 
 
 table = data_manager.get_table_from_file("customers.csv")
@@ -123,15 +165,57 @@ print(update(table, us_input[0]))
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
 
-    # your code
+    #take from table column with names and add to customer_names list
 
-    pass
+    customer_names=[table[i][1] for i in range(len(table))] #list with all names
+
+    name = ""
+    for row in table:
+        if len(row[1]) > len(name):
+            len_list = [table[i][1] for i in range(len(table)) if len(row[1]) == len(table[i][1])] #list with the longest names
+            name = row[1]
+            #list with the longest names in big letters
+            upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])] 
+
+
+
+
+    #insertion sort to find descending alphabetical order longest name
+    for number in range (1, len(upper_list)):
+        current_number = upper_list[number]
+        element = number - 1
+
+        while element >= 0 and upper_list[element] > current_number:
+            upper_list[element+1] = upper_list[element]
+            element -=1
+
+        upper_list[element+1] = current_number
+
+
+    #take id the longest name by descending alphabetical order 
+    for row in table:
+        if upper_list[0] == row[1].upper():
+            id_ = row[0]
+
+
+    return id_
+
+
+
+table = data_manager.get_table_from_file("customers.csv")
+get_longest_name_id(table)
+    
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
 
-    # your code
+    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1'] #list with all id 1, 0
+    
+    return(subscribed_to_newsletter_list)
+    
 
-    pass
+table = data_manager.get_table_from_file("customers.csv")
+get_longest_name_id(table)
+get_subscribed_emails(table)

@@ -32,7 +32,42 @@ def start_module():
 
     # you code
 
-    pass
+    is_not_main_menu = True
+    while is_not_main_menu:
+
+        inventory_manager_menu= [
+            "(1) Show table",
+            "(2) Add",
+            "(3) Remove",
+            "(4) Update",
+            "(5) Get available items",
+            "(6) Get average durability by manufacturers"]
+
+        ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
+
+
+        chose_menu_number = input()
+        table = data_manager.get_table_from_file('inventory/inventory.csv')
+
+        is_menu_inventory = True
+        while is_menu_inventory:
+            if chose_menu_number == "1":
+                show_table(table)
+            elif chose_menu_number == "2":
+                add(table)
+                is_menu_inventory = False
+            elif chose_menu_number == "3":
+                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                is_menu_inventory = False # break i false obie opcje dzialaja, wraca do inventory menu
+            elif chose_menu_number == "4":
+                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+            elif chose_menu_number == "5":
+                get_available_items(table)
+            elif chose_menu_number == "6":
+                get_average_durability_by_manufacturers(table)
+            elif chose_menu_number == "0":
+                is_menu_inventory = False 
+                is_not_main_menu = False
 
 
 def show_table(table):
@@ -69,7 +104,18 @@ def add(table):
     #
     # return table
 
+<<<<<<< HEAD
+    inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
+    'Enter purchase date: ', 'Enter durability: ']
+
+    new_record = ui.get_inputs(inputs, 'Add new record')
+    table.append(new_record)
+
+
+    return table
+=======
     pass
+>>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
 
 
 def remove(table, id_):
@@ -84,8 +130,18 @@ def remove(table, id_):
         Table without specified record.
     """
 
+<<<<<<< HEAD
+    id_ = ''.join(id_)
+
+    for record in table:
+        if record[0] == id_:
+            table.remove(record)
+
+    return table
+=======
     #inputs = ['Enter id: ']
     #del_record = ui.get_inputs(inputs, 'Remove record')
+>>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
 
     # for record in table:
     #     if record[0] == id_:
