@@ -1,9 +1,5 @@
-import inventory
-import accounting
-import hr
-import sales
-
 def make_table(table, title_list):
+
     table.insert(0, title_list)
     columns = len(table[0])
     rows = len(table)
@@ -66,8 +62,8 @@ def make_table(table, title_list):
 
     for row in table:
         for element in row:
-            print(element, end='')
-        print()
+            print(element, end=' ')
+        print(' ')
 
 
 
@@ -207,7 +203,7 @@ def main():
     print_table(table, title_list)
 
 
-main()
+#main()
 
 
 # TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
