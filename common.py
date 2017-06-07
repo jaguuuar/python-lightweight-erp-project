@@ -26,3 +26,20 @@ def generate_random(table):
     # your code
 
     return generated
+
+
+def add(table):
+
+    """
+    Asks user for input and adds it into the table.
+
+    Args:
+        table: table to add new record to
+
+    Returns:
+        Table with a new record
+    """
+
+    # your code
+
+    return table

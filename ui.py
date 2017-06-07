@@ -88,7 +88,9 @@ def get_inputs(list_labels, title):
     """
     inputs = []
 
-    # your code
+    print(title)
+    for enter_input in list_labels:
+        inputs.append(input(enter_input))
 
     return inputs
 
