@@ -61,6 +61,7 @@ def start_module():
                 is_menu_inventory = False # break i false obie opcje dzialaja, wraca do inventory menu
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_inventory = False
             elif chose_menu_number == "5":
                 get_available_items(table)
                 is_menu_inventory = False

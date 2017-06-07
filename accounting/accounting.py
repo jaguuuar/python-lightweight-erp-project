@@ -10,8 +10,6 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -150,9 +148,9 @@ def update(table, id_):
     return table
 
 
-table = data_manager.get_table_from_file("items.csv")
-us_input = ui.get_inputs(['Enter ID: '],"hello")
-print(update(table, us_input[0]))
+#table = data_manager.get_table_from_file("items.csv")
+#us_input = ui.get_inputs(['Enter ID: '],"hello")
+#print(update(table, us_input[0]))
 
 
 
