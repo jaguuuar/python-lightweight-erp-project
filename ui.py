@@ -1,3 +1,5 @@
+
+
 def make_table(table, title_list):
 
     table.insert(0, title_list)
@@ -152,11 +154,34 @@ def get_inputs(list_labels, title):
         List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
+    # 1 - letters ans spaces
+    # 2 - numbers
+    # 3 - numbers under 2018 year
+
     inputs = []
 
     print(title)
-    for enter_input in list_labels:
-        inputs.append(input(enter_input))
+    for enter_input in range(0, len(list_labels), 2):
+        new_input = input(list_labels[enter_input])
+        if len(list_labels) == 1:
+            while not new_input.isdigit():
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 1:
+            while all (x.isspace() for x in new_input) or not all(x.isalpha() or x.isspace() for x in new_input):
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 2:
+            while all (x.isspace() for x in new_input) or not all(x.isdigit() or x.isspace() for x in new_input):
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 3:
+            while all (x.isspace() for x in new_input) or not all(x.isdigit() or x.isspace() for x in new_input) or int(new_input) < 2017:
+                new_input = input(list_labels[enter_input])
+
+
+
+        inputs.append(new_input)
 
     return inputs
 

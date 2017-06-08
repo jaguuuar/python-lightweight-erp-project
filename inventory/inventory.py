@@ -93,8 +93,8 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter name: ', 'Enter manufacturer: ',
-    'Enter purchase date: ', 'Enter durability: ']
+    inputs = ['Enter name: ', 1, 'Enter manufacturer: ', 1,
+    'Enter purchase date: ', 3, 'Enter durability: ', 2]
 
     table = common.add_record(table, inputs)
 
