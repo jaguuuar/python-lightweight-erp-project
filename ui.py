@@ -103,8 +103,7 @@ def print_result(result, label):
     Returns:
         This function doesn't return anything it only prints to console.
     """
-
-    print('{}{}'.format(label, result))
+    pass
 
 
 def print_menu(title, list_options, exit_message):
@@ -132,7 +131,6 @@ def print_menu(title, list_options, exit_message):
     option_from_menu = ("\n ").join(list_options)
 
     print(title, "\n" , option_from_menu, "\n" , exit_message)
-
 
 
 def get_inputs(list_labels, title):

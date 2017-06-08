@@ -144,15 +144,46 @@ def update(table, id_):
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
 
-    # your code
+    # take from table column with names and add to customer_names list
 
-    pass
+    customer_names = [table[i][1] for i in range(len(table))]  # list with all names
+
+    name = ""
+    for row in table:
+        if len(row[1]) > len(name):
+            len_list = [table[i][1] for i in range(len(table)) if len(row[1]) == len(table[i][1])]  # list with the longest names
+            name = row[1]
+            # list with the longest names in big letters
+            upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])]
+
+    # common.insertion_sort(upper_list)
+
+    # insertion sort to find descending alphabetical order longest name
+
+    for number in range(1, len(upper_list)):
+        current_number = upper_list[number]
+        element = number - 1
+
+        while element >= 0 and upper_list[element] > current_number:
+            upper_list[element+1] = upper_list[element]
+            element -= 1
+
+        upper_list[element+1] = current_number
+    print(upper_list)
+
+    # take id the longest name by descending alphabetical order
+    for row in table:
+        if upper_list[0] == row[1].upper():
+            id_ = row[0]
+
+    return id_
+
+    # the question: Which customers has subscribed to the newsletter?
+    # return type: list of strings (where string is like email+separator+name, separator=";")
 
 
-# the question: Which customers has subscribed to the newsletter?
-# return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
 
-    # your code
+    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']  # list with all id 1, 0
 
-    pass
+    return(subscribed_to_newsletter_list)
