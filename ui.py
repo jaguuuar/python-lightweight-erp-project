@@ -193,21 +193,22 @@ def print_error_message(message):
 # TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
 
 
-def main():
-    '''table = [['1dsa', 'Janusz Kozlowski', 1922234, '123123'], ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 212],
-             ['dkllk7', 'AlbadasSadasd', 1929929921223, 'ewqwe'], ['dkllk798820', 'AlbadasSasdasadasd', 192992992122322, 'dasdsa'],
-             ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 123], ['dakdjhkajhdw', 'Barbra Saasdatreid', '1231', 1991122]]'''
-
-    title_list = ['ID', 'NAME', 'YEAR']
-
-    with open('sales/sales.csv', "r") as file:
-        lines = file.readlines()
-    table = [element.replace("\n", "").split(";") for element in lines]
-
-    print_table(table, title_list)
+#def main():
+#    '''table = [['1dsa', 'Janusz Kozlowski', 1922234, '123123'], ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 212],
+ #            ['dkllk7', 'AlbadasSadasd', 1929929921223, 'ewqwe'], ['dkllk798820', 'AlbadasSasdasadasd', 192992992122322, 'dasdsa'],
+  #           ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 123], ['dakdjhkajhdw', 'Barbra Saasdatreid', '1231', 1991122]]'''
 
 
-main()
+#   title_list = ['ID', 'NAME', 'YEAR']
+
+#    with open('sales/sales.csv', "r") as file:
+ #       lines = file.readlines()
+  #  table = [element.replace("\n", "").split(";") for element in lines]
+
+   # print_table(table, title_list)
+
+
+#main()
 
 
 # TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!

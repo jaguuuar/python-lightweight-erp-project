@@ -10,12 +10,8 @@
 # importing everything you need
 import os
 import sys
-<<<<<<< HEAD
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
-=======
+
 import time
-sys.path.append('/home/kamil/Dokumenty/srodda/python-lightweight-erp-project-do_you_even_code_bro')
->>>>>>> c830f778b11929f1b85c2ec9acbfbb99bfde0d6f
 
 # User interface module
 import ui
@@ -192,7 +188,7 @@ def update(table, id_):
 
 ''' Above three lines should be deleted at the end of our coding!'''
 
-table = data_manager.get_table_from_file("inventory.csv")
+table = data_manager.get_table_from_file('inventory/inventory.csv')
 us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
 print(update(table, us_input[0]))
 

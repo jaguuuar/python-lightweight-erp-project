@@ -27,6 +27,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('store/games.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -42,7 +43,7 @@ def start_module():
         ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('store/games.csv')
+        
         
         is_menu_stores = True
         while is_menu_store:
@@ -139,13 +140,13 @@ def update(table, id_):
             for j in range(0,4):
                 element[j+1] = inputs_entered[j]
 
-    data_manager.write_table_to_file("games.csv", table)
+    data_manager.write_table_to_file("store/games.csv", table)
 
     return table
 
 ''' Above three lines should be deleted at the end of our coding!'''
 
-table = data_manager.get_table_from_file("games.csv")
+table = data_manager.get_table_from_file('store/games.csv')
 us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
 print(update(table, us_input[0]))
 

@@ -7,8 +7,7 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+
 # User interface module
 import ui
 # data manager module
@@ -26,6 +25,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('hr/persons.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -41,7 +41,7 @@ def start_module():
         ui.print_menu("Human resources manager menu: ", human_resources_manager_menu, "(0) Back to main menu")
         
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('hr/persons.csv')
+        
         
         is_menu_hr = True
         while is_menu_hr:
@@ -140,13 +140,13 @@ def update(table, id_):
             for j in range(0,2):
                 element[j+1] = inputs_entered[j]
 
-    data_manager.write_table_to_file("persons.csv", table)
+    data_manager.write_table_to_file("hr/persons.csv", table)
 
     return table
 
 ''' Above three lines should be deleted at the end of our coding!'''
 
-table = data_manager.get_table_from_file("persons.csv")
+table = data_manager.get_table_from_file('hr/persons.csv')
 us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
 print(update(table, us_input[0]))
 

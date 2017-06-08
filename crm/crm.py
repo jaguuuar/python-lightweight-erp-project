@@ -35,6 +35,7 @@ def start_module():
     """
 
     table = data_manager.get_table_from_file('crm/customers.csv')
+
     is_not_main_menu = True
     while is_not_main_menu:
 
@@ -146,15 +147,13 @@ def update(table, id_):
             for j in range(0,3):
                 element[j+1] = inputs_entered[j]
 
-    data_manager.write_table_to_file("customers.csv", table)
+    data_manager.write_table_to_file("crm/customers.csv", table)
 
     return table
     pass
 
 
-table = data_manager.get_table_from_file("customers.csv")
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
+
 
 
 # special functions:
@@ -177,6 +176,8 @@ def get_longest_name_id(table):
             #list with the longest names in big letters
             upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])] 
 
+    print(upper_list)
+    #common.insertion_sort(upper_list)
 
 
 
@@ -190,6 +191,7 @@ def get_longest_name_id(table):
             element -=1
 
         upper_list[element+1] = current_number
+    print(upper_list)
 
 
     #take id the longest name by descending alphabetical order 
@@ -197,7 +199,7 @@ def get_longest_name_id(table):
         if upper_list[0] == row[1].upper():
             id_ = row[0]
 
-
+    print(id_)
     return id_
 
 
