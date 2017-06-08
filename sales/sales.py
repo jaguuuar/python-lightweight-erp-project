@@ -75,8 +75,9 @@ def start_module():
                                   'Enter final month ', 'Enter final day ', 'Enter final year ']
 
                 inputs_list = ui.get_inputs(questions_list, 'Enter a time')
-                get_items_sold_between(table, inputs_list[0], inputs_list[1], inputs_list[2], inputs_list[3],
-                                       inputs_list[4], inputs_list[5])
+                result = get_items_sold_between(table, inputs_list[0], inputs_list[1], inputs_list[2], inputs_list[3],
+                                                inputs_list[4], inputs_list[5])
+                ui.print_result(result, 'Items in part of time: \n')
                 is_menu_sales = False
 
             elif chose_menu_number == "0":
@@ -195,4 +196,32 @@ def get_lowest_price_item_id(table):
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
-    pass
+    if len(str(day_from)) < 2:
+        day_from = '0' + str(day_from)
+    if len(str(day_to)) < 2:
+        day_to = '0' + str(day_to)
+    if len(str(month_from)) < 2:
+        month_from = '0' + str(month_from)
+    if len(str(month_to)) < 2:
+        month_to = '0' + str(month_to)
+
+    date_from = str(year_from) + str(month_from) + str(day_from)
+    date_to = str(year_to) + str(month_to) + str(day_to)
+
+
+    dict_with_all_rows = {}
+    sorted_list = []
+    for i in range(len(table)):
+        if len(table[i][4]) < 2:
+            table[i][4] = '0' + str(table[i][4])
+        if len(table[i][3]) < 2:
+            table[i][3] = '0' + str(table[i][3])
+
+        dict_with_all_rows[(table[i][0], table[i][1], table[i][2])] = str(table[i][5]) + str(table[i][3]) + str(table[i][4])
+
+    for key, value in dict_with_all_rows.items():
+        if int(value) > int(date_from) and int(value) < int(date_to):
+            sorted_list.append([key[0], key[1], int(key[2]), int(dict_with_all_rows[key][4:6]), int(dict_with_all_rows[key][6:]),
+                                int(dict_with_all_rows[key][:4])])
+
+    return(sorted_list)
