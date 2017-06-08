@@ -130,7 +130,7 @@ def update(table, id_):
     """
     inputs = ['Enter title: ', 'Enter price: ',
     'Enter month: ', 'Enter day: ', 'Enter year: ']
-    
+
     table = common.update_record(table, inputs, id_)
 
     return table
@@ -144,9 +144,35 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first by descending alphabetical order
 def get_lowest_price_item_id(table):
 
-    # your code
+    lowest = int(table[0][2])
+    lowest_price = []
 
-    pass
+    for j in range(len(table)):
+        element = table[j][2]
+        if int(element) < int(lowest):
+            lowest = element
+
+    for i in range(len(table)):
+        element = table[i][2]
+        if element == lowest:
+            lowest_price.append(table[i][1].upper())
+
+    # insertion sort to find descending alphabetical order longest name
+    for number in range(1, len(lowest_price)):
+        current_number = lowest_price[number]
+        element = number - 1
+
+        while element >= 0 and lowest_price[element] > current_number:
+            lowest_price[element+1] = lowest_price[element]
+            element -= 1
+
+        lowest_price[element+1] = current_number
+
+    for row in table:
+        if lowest_price[0] == row[1].upper():
+            id_ = row[0]
+
+    return id_
 
 
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)
