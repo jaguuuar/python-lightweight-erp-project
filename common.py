@@ -1,6 +1,8 @@
 # implement commonly used functions here
 
 import random
+import string
+import ui
 
 
 # generate and return a unique and random string
@@ -20,9 +22,6 @@ def generate_random(table):
     Returns:
         Random and unique string
     """
-
-    #generated = ''
-
 
     id_list=[]
     for record in table:
@@ -49,6 +48,7 @@ def generate_random(table):
 
     return generated
 
+<<<<<<< HEAD
 def insertion_sort(list_to_sort):
     for number in range (1, len(list_to_sort)):
         current_number = list_to_sort[number]
@@ -62,19 +62,21 @@ def insertion_sort(list_to_sort):
 
 
     return list_to_sort
+=======
+def add_record(table, inputs_list):
+    new_id = generate_random(table)
+    new_record = ui.get_inputs(inputs_list, 'Add new record')
+    new_record.insert(0,new_id)
+    table.append(new_record)
 
-def add(table):
+    return table
+>>>>>>> 93b074052b7be066afa96bef1a621b8ecc2ff9a4
 
-    """
-    Asks user for input and adds it into the table.
 
-    Args:
-        table: table to add new record to
-
-    Returns:
-        Table with a new record
-    """
-
-    # your code
+def remove_record(table, id_):
+    id_ = ''.join(id_)
+    for record in table:
+        if record[0] == id_:
+            table.remove(record)
 
     return table

@@ -8,8 +8,9 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+import syssys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+
+import time
 # User interface module
 import ui
 # data manager module
@@ -43,7 +44,7 @@ def start_module():
 
         chose_menu_number = input()
         table = data_manager.get_table_from_file('store/games.csv')
-        
+
         is_menu_stores = True
         while is_menu_store:
 
@@ -62,7 +63,7 @@ def start_module():
             elif chose_menu_number == "6":
                 get_average_by_manufacturer(table, manufacturer)
             elif chose_menu_number == "0":
-                is_menu_store = False 
+                is_menu_store = False
                 is_not_main_menu = False
 
 def show_table(table):
@@ -91,8 +92,9 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter title: ', 'Enter manufacturer: ',
+    'Enter price: ', 'Enter in stock: ']
+    table = common.add_record(table, inputs)
 
     return table
 
@@ -110,8 +112,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 
@@ -156,16 +157,39 @@ print(update(table, us_input[0]))
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
+    manufacturers = []
+    for record in table:
+        if record[2] not in manufacturers:
+            manufacturers.append(record[2])
 
-    # your code
+    games_counts = {}
+    for manufacturer in manufacturers:
+        counts_sum = 0
+        for record in table:
+            if manufacturer in record:
+                counts_sum += 1
+        games_counts[manufacturer] = counts_sum
 
-    pass
+    return games_counts
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
+    stock_sum = 0
+    game_count = 0
+    for record in table:
+        for manufacturer in record:
+            if manufacturer in record:
+                stock_sum += int(record[4])
+                game_count += 1
 
-    # your code
+    average_games_in_stock = round(stock_sum / game_count, 2)
 
-    pass
+    return average_games_in_stock
+
+
+#table = data_manager.get_table_from_file('games.csv')
+#print(table)
+#print(get_counts_by_manufacturers(table))
+#print(get_average_by_manufacturer(table, ui.get_inputs(['Enter manufacturer: '], 'Get average')))

@@ -92,8 +92,8 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter name: ', 'Enter birth date: ']
+    table = common.add_record(table, inputs)
 
     return table
 
@@ -111,8 +111,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 

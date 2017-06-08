@@ -95,12 +95,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter moth: ', 'Enter day: ',
+    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    table = common.add_record(table, inputs)
 
     return table
     pass
-
 
 def remove(table, id_):
     """
@@ -113,8 +113,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
     pass
