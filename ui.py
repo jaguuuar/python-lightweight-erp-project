@@ -103,7 +103,21 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
-    print('{}{}'.format(label, result))
+    if type(result) is dict:
+        print (label)
+        for keys, values in result.items():
+            print(keys, values, end='\n\n')
+        print('\n')
+
+    elif type(result) is list:
+        print(label)
+        for lists in result:
+            print(lists)
+        print('\n')
+
+    else:
+        print('{}{}'.format(label, result))
+        print('\n')
 
 
 def print_menu(title, list_options, exit_message):
@@ -161,7 +175,7 @@ def get_inputs(list_labels, title):
     # 6 - numbers, letters
     # 7 - in , out
     # 8 - boolean 1 or 0
-    # 9 - number from 1 to 6
+    # 9 - number from 0 to 6
 
     inputs = []
     wrong_input = 'Wrong input! Enter again'
@@ -238,7 +252,7 @@ def get_inputs(list_labels, title):
                 while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
                     print(wrong_input)
                     new_input = input(list_labels[enter_input])
-                if int(new_input) in range(1, 7):
+                if int(new_input) in range(0, 7):
                     break
                 else:
                     new_input += 's'

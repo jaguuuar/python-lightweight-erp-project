@@ -39,8 +39,9 @@ def start_module():
 
         ui.print_menu("Human resources manager menu: ", human_resources_manager_menu, "(0) Back to main menu")
 
-        chose_menu_number = ui.get_inputs(['Chose option: ', 9], '')
-        chose_menu_number = "".join(chose_menu_number)
+
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
+        chose_menu_number = inputs[0]
 
         is_menu_hr = True
         while is_menu_hr:
@@ -58,9 +59,13 @@ def start_module():
                 update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_hr = False
             elif chose_menu_number == "5":
-                get_oldest_person(table)
+                result = get_oldest_person(table)
+                ui.print_result(result, 'The oldest person is (or are): \n')
+                is_menu_hr = False
             elif chose_menu_number == "6":
-                get_persons_closest_to_average(table)
+                result = get_persons_closest_to_average(table)
+                ui.print_result(result, 'Person closest to the average age is (or are): \n')
+                is_menu_hr = False
             elif chose_menu_number == "0":
                 is_menu_hr = False
                 is_not_main_menu = False
@@ -172,29 +177,17 @@ def get_persons_closest_to_average(table):
         list_with_age.append(element)
         summed_age += element
 
-    print(list_with_age)
+
     average_age = round(summed_age/len(table))
-    print(average_age)
+
 
     for i in range(len(list_with_age)):
         element = 2017 - int(table[i][2])
         temp = abs(2017 - int(table[i][2]) - average_age)
-        print(temp)
+
         if element == average_age:
             closest_to_average_age.append(table[i][1])
 
         elif element > temp:
             temp = element
             closest_to_average_age.append(table[i][1])
-
-    print(closest_to_average_age)
-
-
-def main():
-
-    with open('persons.csv', "r") as file:
-        lines = file.readlines()
-    table = [element.replace("\n", "").split(";") for element in lines]
-
-    print(get_oldest_person(table))
-    get_persons_closest_to_average(table)

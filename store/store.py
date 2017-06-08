@@ -40,8 +40,8 @@ def start_module():
 
         ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
 
-        chose_menu_number = ui.get_inputs(['Chose option: ', 9], '')
-        chose_menu_number = "".join(chose_menu_number)
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
+        chose_menu_number = inputs[0]
 
         is_menu_stores = True
         while is_menu_stores:
@@ -59,15 +59,19 @@ def start_module():
                 update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_stores = False
             elif chose_menu_number == "5":
-                get_counts_by_manufacturers(table)
+                result = get_counts_by_manufacturers(table)
+                ui.print_result(result, "Number of games that are available of each manufacturer: ")
                 is_menu_stores = False
             elif chose_menu_number == "6":
-                result = get_average_by_manufacturer(table, ui.get_inputs(['Enter manufacturer: ', 1], 'average by manufacturer'))
-                print (result)
+                list_labels = ['Which manufacturer you want to check? ', 1]
+                manufacturer = ui.get_inputs(list_labels, 'One question for you! \n')
+                result = get_average_by_manufacturer(table, manufacturer)
+                ui.print_result(result, "Number of games that are available of each manufacturer: ")
                 is_menu_stores = False
             elif chose_menu_number == "0":
                 is_menu_stores = False
                 is_not_main_menu = False
+
 
 def show_table(table):
     """
@@ -163,7 +167,6 @@ def get_counts_by_manufacturers(table):
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
     manufacturer = "".join(manufacturer).rstrip()
-    #manufacturer = manufacturer.rstrip()
     print(manufacturer)
     stock_sum = 0
     game_count = 0
