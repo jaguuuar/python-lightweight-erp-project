@@ -41,7 +41,8 @@ def start_module():
 
         ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
 
-        chose_menu_number = input()
+        inputs = ui.get_inputs(['Choose option from menu '], '')
+        chose_menu_number = inputs[0]
 
         is_menu_inventory = True
         while is_menu_inventory:
@@ -59,10 +60,11 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "5":
                 result = get_available_items(table)
-                ui.print_result('exceeded their durability', result)
+                ui.print_result(result, "Your available items are: ( ID, Name, Manufacturer, Purhase date, Durability)\n")
                 is_menu_inventory = False
             elif chose_menu_number == "6":
-                get_average_durability_by_manufacturers(table)
+                result = get_average_durability_by_manufacturers(table)
+                ui.print_result(result, 'Average durability by manufacturer: \n')
                 is_menu_inventory = False
             elif chose_menu_number == "0":
                 is_menu_inventory = False
@@ -144,15 +146,20 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_items(table):
-    available_items = []
+    '''available_items = []
+
     for record in table:
         exceed_year = int(record[3]) + int(record[4])
         if exceed_year >= 2017:
             available_items.append(record)
+    return available_items'''
+
+    available_items = [table[i][:] for i in range(len(table)) if int(table[i][4]) >= 2017 - int(table[i][3])]
+    for row in available_items:
+        row[3] = int(row[3])
+        row[4] = int(row[4])
 
     return available_items
-
-
 
 # the question: What are the average durability times for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }

@@ -106,17 +106,17 @@ def print_result(result, label):
         print (label)
         for keys, values in result.items():
             print(keys, values, end='\n\n')
-
+        print('\n')
 
     elif type(result) is list:
         print(label)
         for lists in result:
-            for elements in lists:
-                print(elements, end =" | ")
-            print("\n")
+            print(lists)
+        print('\n')
 
     else:
         print('{}{}'.format(label, result))
+        print('\n')
 
 
 def print_menu(title, list_options, exit_message):

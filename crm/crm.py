@@ -38,10 +38,10 @@ def start_module():
             "(5) Get longest name id",
             "(6) Get subscribed emails"]
 
-
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
-        chose_menu_number = input()
+        inputs = ui.get_inputs(['Choose option from menu '], '')
+        chose_menu_number = inputs[0]
 
         is_menu_crm = True
         while is_menu_crm:
@@ -59,9 +59,13 @@ def start_module():
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
                 is_menu_crm = False
             elif chose_menu_number == "5":
-                get_longest_name_id(table)
+                result = get_longest_name_id(table)
+                ui.print_result(result, 'The ID of the customer with the longest name: ')
+                is_menu_crm = False
             elif chose_menu_number == "6":
-                get_subscribed_emails(table)
+                result = get_subscribed_emails(table)
+                ui.print_result(result, 'Customers that subscribed to the newsletter: ')
+                is_menu_crm = False
             elif chose_menu_number == "0":
                 is_menu_crm = False
                 is_not_main_menu = False
@@ -156,7 +160,7 @@ def get_longest_name_id(table):
             # list with the longest names in big letters
             upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])]
 
-    # common.insertion_sort(upper_list)
+
 
     # insertion sort to find descending alphabetical order longest name
 
@@ -169,7 +173,6 @@ def get_longest_name_id(table):
             element -= 1
 
         upper_list[element+1] = current_number
-    print(upper_list)
 
     # take id the longest name by descending alphabetical order
     for row in table:

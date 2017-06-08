@@ -42,7 +42,8 @@ def start_module():
 
         ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
 
-        chose_menu_number = input()
+        inputs = ui.get_inputs(['Choose option from menu '], '')
+        chose_menu_number = inputs[0]
 
         is_menu_sales = True
         while is_menu_sales:
@@ -64,7 +65,10 @@ def start_module():
                 is_menu_sales = False
 
             elif chose_menu_number == "5":
-                get_lowest_price_item_id(table)
+                result = get_lowest_price_item_id(table)
+
+                ui.print_result(result, 'The id of lowest price: \n')
+                is_menu_sales = False
 
             elif chose_menu_number == "6":
                 questions_list = ['Enter initial month ', 'Enter initial day ', 'Enter initial year ',
@@ -192,22 +196,3 @@ def get_lowest_price_item_id(table):
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
     pass
-    '''for number in range(1, len(lowest_price)):
-        current_number = lowest_price[number]
-        element = number - 1
-
-        while element >= 0 and lowest_price[element] > current_number:
-            lowest_price[element+1] = lowest_price[element]
-            element -= 1
-
-        lowest_price[element+1] = current_number'''
-
-    '''    for i in range(1, len(table)):
-        tmp = table[i][5]
-        number_2 = i
-        while number_2 > 0 and tmp < table[number_2 - 1]:
-            table[number_2] = table[number_2 - 1]
-            number_2 -= 1
-        table[number_2] = tmp
-        year_table_sorted.append(tmp)
-        print(year_table_sorted)'''

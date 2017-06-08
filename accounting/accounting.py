@@ -41,7 +41,8 @@ def start_module():
 
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
 
-        chose_menu_number = input()
+        inputs = ui.get_inputs(['Choose option from menu '], '')
+        chose_menu_number = inputs[0]
 
         is_menu_accounting = True
         while is_menu_accounting:
