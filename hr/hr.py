@@ -150,4 +150,23 @@ def get_persons_closest_to_average(table):
 
     # your code
 
+<<<<<<< HEAD
     pass
+=======
+    print(list_with_age)
+    average_age = round(summed_age/len(table))
+    print(average_age)
+
+    for i in range(len(list_with_age)):
+        element = 2017 - int(table[i][2])
+        temp = abs(2017 - int(table[i][2]) - average_age)
+        print(temp)
+        if element == average_age:
+            closest_to_average_age.append(table[i][1])
+
+        elif element > temp:
+            temp = element
+            closest_to_average_age.append(table[i][1])
+
+    print(closest_to_average_age)
+>>>>>>> b630add24637ddfb0bb135a37833a60b984603ee

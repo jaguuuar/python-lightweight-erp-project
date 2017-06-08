@@ -190,7 +190,6 @@ def get_lowest_price_item_id(table):
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
-    year_table_sorted = []
     pass
     '''for number in range(1, len(lowest_price)):
         current_number = lowest_price[number]

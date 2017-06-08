@@ -106,11 +106,19 @@ def print_result(result, label):
         for keys, values in result.items():
             print(keys, values, end='\n\n')
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b630add24637ddfb0bb135a37833a60b984603ee
     elif type(result) is list:
         print(label)
         for lists in result:
             for elements in lists:
+<<<<<<< HEAD
                 print(elements, end=" | ")
+=======
+                print(elements, end =" | ")
+>>>>>>> b630add24637ddfb0bb135a37833a60b984603ee
             print("\n")
 
     else:

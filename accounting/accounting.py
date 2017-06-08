@@ -23,7 +23,6 @@ def start_module():
     Starts this module and displays its menu.
     User can access default special features from here.
     User can go back to main menu from here.
-
     Returns:
         None
     """
@@ -79,7 +78,6 @@ def start_module():
 def show_table(table):
     """
     Display a table
-
     Args:
         table: list of lists to be displayed.
     Returns:
@@ -92,10 +90,8 @@ def show_table(table):
 def add(table):
     """
     Asks user for input and adds it into the table.
-
     Args:
         table: table to add new record to
-
     Returns:
         Table with a new record
     """
@@ -109,11 +105,9 @@ def add(table):
 def remove(table, id_):
     """
     Remove a record with a given id from the table.
-
     Args:
         table: table to remove a record from
         id_ (str): id of a record to be removed
-
     Returns:
         Table without specified record.
     """
@@ -127,11 +121,9 @@ def remove(table, id_):
 def update(table, id_):
     """
     Updates specified record in the table. Ask users for new data.
-
     Args:
         table: list in which record should be updated
         id_ (str): id of a record to update
-
     Returns:
         table with updated record
     """
@@ -157,6 +149,7 @@ def which_year_max(table):
 
 
     for elements in table:
+
             if elements[3] not in profit:
                 profit.update({elements[3] : 0})
                 if elements [4] == "in":
@@ -168,6 +161,19 @@ def which_year_max(table):
                     profit[elements[3]] += (int(elements[5]))
                 elif elements[4] == "out":
                     profit[elements[3]] += (-1 * int(elements[5]))
+
+        if elements[3] not in profit:
+            profit.update({elements[3] : 0})
+            if elements [4] == "in":
+                profit[elements[3]] += (int(elements[5]))
+            elif elements[4] == "out":
+                profit[elements[3]] += (-1 * int(elements[5]))
+        elif elements[3] in profit:
+            if elements [4] == "in":
+                profit[elements[3]] += (int(elements[5]))
+            elif elements[4] == "out":
+                profit[elements[3]] += (-1 * int(elements[5]))
+
 
     for value in profit.values():
         profit_values.append(value)

@@ -147,7 +147,6 @@ def update(table, id_):
 def get_longest_name_id(table):
 
     # take from table column with names and add to customer_names list
-<<<<<<< HEAD
 
     customer_names = [table[i][1] for i in range(len(table))]  # list with all names
 
@@ -167,8 +166,6 @@ def get_longest_name_id(table):
         current_number = upper_list[number]
         element = number - 1
 
-=======
-
     customer_names = [table[i][1] for i in range(len(table))]  # list with all names
 
     name = ""
@@ -187,17 +184,17 @@ def get_longest_name_id(table):
         current_number = upper_list[number]
         element = number - 1
 
->>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
+
         while element >= 0 and upper_list[element] > current_number:
             upper_list[element+1] = upper_list[element]
             element -= 1
 
         upper_list[element+1] = current_number
-<<<<<<< HEAD
+
     print(upper_list)
-=======
+
 #    print(upper_list)
->>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
+
 
     # take id the longest name by descending alphabetical order
     for row in table:
@@ -212,10 +209,8 @@ def get_longest_name_id(table):
 
 def get_subscribed_emails(table):
 
-<<<<<<< HEAD
     subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']  # list with all id 1, 0
 
-=======
     subscribed_to_newsletter_list = [[table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']]  # list with all id 1, 0
->>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
+
     return(subscribed_to_newsletter_list)
