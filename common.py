@@ -49,9 +49,6 @@ def generate_random(table):
 
     return generated
 
-
-<<<<<<< HEAD
-
 def insertion_sort(list_to_sort):
     for number in range (1, len(list_to_sort)):
         current_number = list_to_sort[number]
@@ -65,7 +62,7 @@ def insertion_sort(list_to_sort):
 
 
     return list_to_sort
-=======
+
 def add(table):
 
     """
@@ -81,4 +78,3 @@ def add(table):
     # your code
 
     return table
->>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
