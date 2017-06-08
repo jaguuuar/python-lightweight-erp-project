@@ -41,7 +41,8 @@ def start_module():
 
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
-        chose_menu_number = input()
+        chose_menu_number = ui.get_inputs(['Chose option: ', 9], '')
+        chose_menu_number = "".join(chose_menu_number)
 
         is_menu_crm = True
         while is_menu_crm:
@@ -53,10 +54,10 @@ def start_module():
                 add(table)
                 is_menu_crm = False
             elif chose_menu_number == "3":
-                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                remove(table, ui.get_inputs(['Enter id: ', 6], 'Remove record'))
                 is_menu_crm = False
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_crm = False
             elif chose_menu_number == "5":
                 get_longest_name_id(table)
@@ -94,8 +95,8 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter name: ', 'Enter email: ',
-    'Enter subscribed: ']
+    inputs = ['Enter name: ',1 , 'Enter email: ', 6,
+    'Enter subscribed: ', 8]
     table = common.add_record(table, inputs)
 
     return table
@@ -128,8 +129,8 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter name: ', 'Enter email: ',
-    'Enter subscribed: ']
+    inputs = ['Enter name: ',1 , 'Enter email: ', 6,
+    'Enter subscribed: ', 8]
 
     table = common.update_record(table, inputs, id_)
 

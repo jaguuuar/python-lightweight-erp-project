@@ -1,5 +1,4 @@
 
-
 def make_table(table, title_list):
 
     table.insert(0, title_list)
@@ -103,7 +102,8 @@ def print_result(result, label):
     Returns:
         This function doesn't return anything it only prints to console.
     """
-    pass
+
+    print('{}{}'.format(label, result))
 
 
 def print_menu(title, list_options, exit_message):
@@ -133,6 +133,7 @@ def print_menu(title, list_options, exit_message):
     print(title, "\n" , option_from_menu, "\n" , exit_message)
 
 
+
 def get_inputs(list_labels, title):
     """
     Gets list of inputs from the user.
@@ -152,32 +153,95 @@ def get_inputs(list_labels, title):
         List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
-    # 1 - letters ans spaces
-    # 2 - numbers
+    # 1 - letters, spaces
+    # 2 - numbers > 0
     # 3 - numbers under 2018 year
+    # 4 - numbers under 12 month
+    # 5 - numbers under 31 days
+    # 6 - numbers, letters
+    # 7 - in , out
+    # 8 - boolean 1 or 0
+    # 9 - number from 1 to 6
 
     inputs = []
-
+    wrong_input = 'Wrong input! Enter again'
     print(title)
     for enter_input in range(0, len(list_labels), 2):
         new_input = input(list_labels[enter_input])
         if len(list_labels) == 1:
             while not new_input.isdigit():
+                print(wrong_input)
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 1:
             while all (x.isspace() for x in new_input) or not all(x.isalpha() or x.isspace() for x in new_input):
+                print(wrong_input)
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 2:
-            while all (x.isspace() for x in new_input) or not all(x.isdigit() or x.isspace() for x in new_input):
-                new_input = input(list_labels[enter_input])
+            while True:
+                while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print(wrong_input)
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) >= 0:
+                    break
+                else:
+                    new_input += 's'
 
         elif list_labels[enter_input + 1] == 3:
-            while all (x.isspace() for x in new_input) or not all(x.isdigit() or x.isspace() for x in new_input) or int(new_input) < 2017:
+            while True:
+                while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print(wrong_input)
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) < 2018:
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 4:
+            while True:
+                while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print(wrong_input)
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) in range(1, 13):
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 5:
+            while True:
+                while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print(wrong_input)
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) in range(1, 32):
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 6:
+            while all (x.isspace() for x in new_input):
+                print(wrong_input)
                 new_input = input(list_labels[enter_input])
 
+        elif list_labels[enter_input + 1] == 7:
+            while not (new_input == 'in' or new_input == 'out'):
+                print(wrong_input)
+                new_input = input(list_labels[enter_input])
 
+        elif list_labels[enter_input + 1] == 8:
+            while not (new_input == '1' or new_input == '0'):
+                print(wrong_input)
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 9:
+            while True:
+                while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print(wrong_input)
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) in range(1, 7):
+                    break
+                else:
+                    new_input += 's'
 
         inputs.append(new_input)
 

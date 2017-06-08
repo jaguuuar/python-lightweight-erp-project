@@ -41,7 +41,8 @@ def start_module():
 
         ui.print_menu("Inventory manager menu: ", inventory_manager_menu, "(0) Back to main menu")
 
-        chose_menu_number = input()
+        chose_menu_number = ui.get_inputs(['Chose option: ', 9], '')
+        chose_menu_number = "".join(chose_menu_number)
 
         is_menu_inventory = True
         while is_menu_inventory:
@@ -52,10 +53,10 @@ def start_module():
                 table = add(table)
                 is_menu_inventory = False
             elif chose_menu_number == "3":
-                table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                table = remove(table, ui.get_inputs(['Enter id: ', 6], 'Remove record'))
                 is_menu_inventory = False
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_inventory = False
             elif chose_menu_number == "5":
                 result = get_available_items(table)
@@ -128,8 +129,8 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter name: ', 'Enter manufacturer: ',
-    'Enter purhase date: ','Enter durability: ']
+    inputs = ['Enter name: ', 1, 'Enter manufacturer: ', 1,
+    'Enter purchase date: ', 3, 'Enter durability: ', 2]
 
     table = common.update_record(table, inputs, id_)
 

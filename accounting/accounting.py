@@ -42,7 +42,8 @@ def start_module():
 
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
 
-        chose_menu_number = input()
+        chose_menu_number = ui.get_inputs(['Chose option: ', 9], '')
+        chose_menu_number = "".join(chose_menu_number)
 
         is_menu_accounting = True
         while is_menu_accounting:
@@ -55,10 +56,10 @@ def start_module():
                 add(table)
                 is_menu_accounting = False
             elif chose_menu_number == "3":
-                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                remove(table, )
                 is_menu_accounting = False
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_accounting = False
             elif chose_menu_number == "5":
                 which_year_max(table)
@@ -92,8 +93,8 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter moth: ', 'Enter day: ',
-    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    inputs = ['Enter moth: ', 4, 'Enter day: ', 5,
+    'Enter year: ', 3, 'Enter type: ', 7, 'Enter amount: ', 2]
     table = common.add_record(table, inputs)
 
     return table
@@ -128,8 +129,8 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter moth: ', 'Enter day: ',
-    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    inputs = ['Enter moth: ', 4, 'Enter day: ', 5,
+    'Enter year: ', 3, 'Enter type: ', 7, 'Enter amount: ', 2]
 
     table = common.update_record(table, inputs, id_)
 
