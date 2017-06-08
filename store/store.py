@@ -25,7 +25,6 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file('store/games.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -41,29 +40,36 @@ def start_module():
         ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
+        table = data_manager.get_table_from_file('store/games.csv')
 
-        is_menu_stores = True
-        while is_menu_stores:
+        is_menu_store = True
+        while is_menu_store:
 
             if chose_menu_number == "1":
                 show_table(table)
-                is_menu_stores = False
             elif chose_menu_number == "2":
                 add(table)
-                is_menu_stores = False
+                is_menu_store = False
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_stores = False
+                is_menu_store = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
-                is_menu_stores = False
+                is_menu_store = False
             elif chose_menu_number == "5":
-                get_counts_by_manufacturers(table)
+                result = get_counts_by_manufacturers(table)
+                ui.print_result(result, "Number of games that are available of each manufacturer: ")
+                is_menu_store = False
             elif chose_menu_number == "6":
-                get_average_by_manufacturer(table, manufacturer)
+                list_labels = ['Which manufacturer you want to check? ']
+                manufacturer = ui.get_inputs(list_labels, 'One question for you! \n')
+                result = get_average_by_manufacturer(table, manufacturer)
+                ui.print_result(result, "Number of games that are available of each manufacturer: ")
+                is_menu_store = False
             elif chose_menu_number == "0":
-                is_menu_stores = False
+                is_menu_store = False
                 is_not_main_menu = False
+
 
 def show_table(table):
     """
@@ -76,8 +82,9 @@ def show_table(table):
         None
     """
 
-    title_list = ['ID', 'TITLE', 'MANUFACTURER', 'PRICE', 'IN_STOCK']
-    ui.print_table(table, title_list)
+    # your code
+
+    pass
 
 
 def add(table):
@@ -91,8 +98,7 @@ def add(table):
         Table with a new record
     """
     inputs = ['Enter title: ', 'Enter manufacturer: ',
-    'Enter price: ', 'Enter in stock: ']
-
+              'Enter price: ', 'Enter in stock: ']
     table = common.add_record(table, inputs)
 
     return table
@@ -125,10 +131,8 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter title: ', 'Enter manufacturer: ',
-    'Enter price: ', 'Enter in stock: ']
 
-    table = common.update_record(table, inputs, id_)
+    # your code
 
     return table
 
@@ -169,3 +173,9 @@ def get_average_by_manufacturer(table, manufacturer):
     average_games_in_stock = round(stock_sum / game_count, 2)
 
     return average_games_in_stock
+
+
+#table = data_manager.get_table_from_file('games.csv')
+#print(table)
+#print(get_counts_by_manufacturers(table))
+#print(get_average_by_manufacturer(table, ui.get_inputs(['Enter manufacturer: '], 'Get average')))

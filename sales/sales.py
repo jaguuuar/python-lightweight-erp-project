@@ -27,7 +27,6 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file('sales/sales.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -40,9 +39,10 @@ def start_module():
             "(5) Get lowest price item id",
             "(6) Get items sold between"]
 
-        ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
+        ui.print_menu("Sales manager menu: ", sales_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
+        table = data_manager.get_table_from_file('sales/sales.csv')
 
         is_menu_sales = True
         while is_menu_sales:
@@ -65,6 +65,7 @@ def start_module():
 
             elif chose_menu_number == "5":
                 get_lowest_price_item_id(table)
+                is_menu_sales = False
 
             elif chose_menu_number == "6":
                 questions_list = ['Enter initial month ', 'Enter initial day ', 'Enter initial year ',
@@ -105,9 +106,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter title: ', 'Enter price: ',
-    'Enter month: ', 'Enter day: ', 'Enter year: ']
-
+    inputs = ['Enter title: ', 'Enter price: ', 'Enter month: ', 'Enter day: ', 'Enter year: ']
     table = common.add_record(table, inputs)
 
     return table
@@ -140,8 +139,8 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter title: ', 'Enter price: ',
-    'Enter month: ', 'Enter day: ', 'Enter year: ']
+
+    inputs = ['Enter title: ', 'Enter price: ', 'Enter month: ', 'Enter day: ', 'Enter year: ']
 
     table = common.update_record(table, inputs, id_)
 

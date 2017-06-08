@@ -48,7 +48,6 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
-                is_menu_crm = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_crm = False
@@ -59,9 +58,13 @@ def start_module():
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
                 is_menu_crm = False
             elif chose_menu_number == "5":
-                get_longest_name_id(table)
+                result = get_longest_name_id(table)
+                ui.print_result(result, 'The ID of the customer with the longest name: ')
+                is_menu_crm = False
             elif chose_menu_number == "6":
-                get_subscribed_emails(table)
+                result = get_subscribed_emails(table)
+                ui.print_result(result, 'Customers that subscribed to the newsletter: ')
+                is_menu_crm = False
             elif chose_menu_number == "0":
                 is_menu_crm = False
                 is_not_main_menu = False
@@ -80,8 +83,7 @@ def show_table(table):
 
     # your code
 
-    title_list = ['ID', 'NAME', 'EMAIL', 'SUBSCRIBED']
-    ui.print_table(table, title_list)
+    pass
 
 
 def add(table):
@@ -145,6 +147,7 @@ def update(table, id_):
 def get_longest_name_id(table):
 
     # take from table column with names and add to customer_names list
+<<<<<<< HEAD
 
     customer_names = [table[i][1] for i in range(len(table))]  # list with all names
 
@@ -164,12 +167,37 @@ def get_longest_name_id(table):
         current_number = upper_list[number]
         element = number - 1
 
+=======
+
+    customer_names = [table[i][1] for i in range(len(table))]  # list with all names
+
+    name = ""
+    for row in table:
+        if len(row[1]) > len(name):
+            len_list = [table[i][1] for i in range(len(table)) if len(row[1]) == len(table[i][1])]  # list with the longest names
+            name = row[1]
+            # list with the longest names in big letters
+            upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])]
+
+    # common.insertion_sort(upper_list)
+
+    # insertion sort to find descending alphabetical order longest name
+
+    for number in range(1, len(upper_list)):
+        current_number = upper_list[number]
+        element = number - 1
+
+>>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
         while element >= 0 and upper_list[element] > current_number:
             upper_list[element+1] = upper_list[element]
             element -= 1
 
         upper_list[element+1] = current_number
+<<<<<<< HEAD
     print(upper_list)
+=======
+#    print(upper_list)
+>>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
 
     # take id the longest name by descending alphabetical order
     for row in table:
@@ -184,6 +212,10 @@ def get_longest_name_id(table):
 
 def get_subscribed_emails(table):
 
+<<<<<<< HEAD
     subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']  # list with all id 1, 0
 
+=======
+    subscribed_to_newsletter_list = [[table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']]  # list with all id 1, 0
+>>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
     return(subscribed_to_newsletter_list)

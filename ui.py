@@ -87,7 +87,6 @@ def print_table(table, title_list):
     """
     # data = [titles] + list(zip(key, values))
     make_table(table, title_list)
-    table.remove(table[0])
 
 
 def print_result(result, label):
@@ -101,7 +100,21 @@ def print_result(result, label):
     Returns:
         This function doesn't return anything it only prints to console.
     """
-    pass
+
+    if type(result) is dict:
+        print (label)
+        for keys, values in result.items():
+            print(keys, values, end='\n\n')
+
+    elif type(result) is list:
+        print(label)
+        for lists in result:
+            for elements in lists:
+                print(elements, end=" | ")
+            print("\n")
+
+    else:
+        print('{}{}'.format(label, result))
 
 
 def print_menu(title, list_options, exit_message):
@@ -125,10 +138,10 @@ def print_menu(title, list_options, exit_message):
         This function doesn't return anything it only prints to console.
     """
 
-    #list options from menu without brackets
+    # list options from menu without brackets
     option_from_menu = ("\n ").join(list_options)
 
-    print(title, "\n" , option_from_menu, "\n" , exit_message)
+    print(title, "\n", option_from_menu, "\n", exit_message)
 
 
 def get_inputs(list_labels, title):
@@ -161,6 +174,8 @@ def get_inputs(list_labels, title):
 # This function displays an error message. (example: Error: @message)
 #
 # @message: string - the error message
+
+
 def print_error_message(message):
     """
     Displays an error message
@@ -172,34 +187,9 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
-
     message_error = "Error: @"
     print('{}{}'.format(message_error, message))
 
-    #print(message_error + "@" + message)
+    # print(message_error + "@" + message)
 
     pass
-
-####################################################
-# TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
-
-
-def main():
-    '''table = [['1dsa', 'Janusz Kozlowski', 1922234, '123123'], ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 212],
-             ['dkllk7', 'AlbadasSadasd', 1929929921223, 'ewqwe'], ['dkllk798820', 'AlbadasSasdasadasd', 192992992122322, 'dasdsa'],
-             ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 123], ['dakdjhkajhdw', 'Barbra Saasdatreid', '1231', 1991122]]'''
-
-    title_list = ['ID', 'NAME', 'YEAR']
-
-    with open('sales/sales.csv', "r") as file:
-        lines = file.readlines()
-    table = [element.replace("\n", "").split(";") for element in lines]
-
-    print_table(table, title_list)
-
-
-#main()
-
-
-# TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
-####################################################

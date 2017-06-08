@@ -59,10 +59,15 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "5":
                 result = get_available_items(table)
+<<<<<<< HEAD
                 ui.print_result('exceeded their durability', result)
+=======
+                ui.print_result(result, "Your available items are: ( ID, Name, Manufacturer, Purhase date, Durability)\n")
+>>>>>>> c8070d2dccf6214e19f92dae1857b3f6d533d542
                 is_menu_inventory = False
             elif chose_menu_number == "6":
-                get_average_durability_by_manufacturers(table)
+                result = get_average_durability_by_manufacturers(table)
+                ui.print_result(result, 'Average durability by manufacturer: \n')
                 is_menu_inventory = False
             elif chose_menu_number == "0":
                 is_menu_inventory = False
@@ -79,9 +84,8 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE_DATE', 'DURABILITY']
-    ui.print_table(table, title_list)
-
+    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE DATE', 'DURABILITY']
+    ui.make_table(table, title_list)
 
 def add(table):
     """
