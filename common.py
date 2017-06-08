@@ -1,6 +1,8 @@
 # implement commonly used functions here
 
 import random
+import string
+import ui
 
 
 # generate and return a unique and random string
@@ -20,9 +22,6 @@ def generate_random(table):
     Returns:
         Random and unique string
     """
-
-    #generated = ''
-
 
     id_list=[]
     for record in table:
@@ -49,6 +48,19 @@ def generate_random(table):
 
     return generated
 
-    # your code
+def add_record(table, inputs_list):
+    new_id = generate_random(table)
+    new_record = ui.get_inputs(inputs_list, 'Add new record')
+    new_record.insert(0,new_id)
+    table.append(new_record)
 
-    return generated
+    return table
+
+
+def remove_record(table, id_):
+    id_ = ''.join(id_)
+    for record in table:
+        if record[0] == id_:
+            table.remove(record)
+
+    return table
