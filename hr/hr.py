@@ -5,14 +5,14 @@
 # birth_date: number (year)
 
 
-'''# importing everything you need      ODKOMENTOWAC TE DOCSTRinGI!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# importing everything you need      ODKOMENTOWAC TE DOCSTRinGI!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import os
 # User interface module
 import ui
 # data manager module
 import data_manager
 # common module
-import common'''
+import common
 
 
 def start_module():
@@ -46,6 +46,7 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_hr = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_hr = False
@@ -75,7 +76,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ['ID', 'NAME', 'BIRTH_DATE']
+    ui.print_table(table, title_list)
 
     pass
 
@@ -193,4 +195,4 @@ def main():
     print(get_oldest_person(table))
     get_persons_closest_to_average(table)
 
-main()
+#main()

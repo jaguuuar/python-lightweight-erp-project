@@ -48,6 +48,7 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_crm = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_crm = False
@@ -78,7 +79,8 @@ def show_table(table):
 
     # your code
 
-    pass
+    title_list = ['ID', 'NAME', 'EMAIL', 'SUBSCRIBED']
+    ui.print_table(table, title_list)
 
 
 def add(table):
