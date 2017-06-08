@@ -5,7 +5,7 @@
 # birth_date: number (year)
 
 
-# importing everything you need
+# importing everything you need      ODKOMENTOWAC TE DOCSTRinGI!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import os
 
 # User interface module
@@ -39,15 +39,17 @@ def start_module():
             "(6) Get persons closest to average"]
 
         ui.print_menu("Human resources manager menu: ", human_resources_manager_menu, "(0) Back to main menu")
-        
+
         chose_menu_number = input()
+
         
-        
+
         is_menu_hr = True
         while is_menu_hr:
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_hr = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_hr = False
@@ -56,12 +58,13 @@ def start_module():
                 is_menu_hr = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_hr = False
             elif chose_menu_number == "5":
                 get_oldest_person(table)
             elif chose_menu_number == "6":
                 get_persons_closest_to_average(table)
             elif chose_menu_number == "0":
-                is_menu_hr = False 
+                is_menu_hr = False
                 is_not_main_menu = False
 
 
@@ -77,7 +80,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ['ID', 'NAME', 'BIRTH_DATE']
+    ui.print_table(table, title_list)
 
     pass
 
@@ -92,8 +96,8 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter name: ', 'Enter birth date: ']
+    table = common.add_record(table, inputs)
 
     return table
 
@@ -111,8 +115,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 
@@ -130,6 +133,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter birth date: ']
 
     inputs = ['Enter Name and surname: ', 'Enter year of birth: ']
     inputs_entered = ui.get_inputs(inputs,'Update your record')
@@ -142,13 +146,14 @@ def update(table, id_):
 
     data_manager.write_table_to_file("hr/persons.csv", table)
 
+    table = common.update_record(table, inputs, id_)
+
+
     return table
 
 ''' Above three lines should be deleted at the end of our coding!'''
 
-table = data_manager.get_table_from_file('hr/persons.csv')
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
+
 
 # special functions:
 # ------------------
@@ -157,15 +162,59 @@ print(update(table, us_input[0]))
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
 
-    # your code
+    oldest = int(table[0][2])
+    oldest_people = []
 
-    pass
+    for j in range(len(table)):
+        element = table[j][2]
+        if int(element) < int(oldest):
+            oldest = element
+            name = table[j][1]
+
+    for i in range(len(table)):
+        element = table[i][2]
+        if element == oldest:
+            oldest_people.append(table[i][1])
+
+    return oldest_people
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
 
-    # your code
+    summed_age = 0
+    list_with_age = []
+    closest_to_average_age = []
 
-    pass
+    for j in range(len(table)):
+        element = 2017 - int(table[j][2])
+        list_with_age.append(element)
+        summed_age += element
+
+    print(list_with_age)
+    average_age = round(summed_age/len(table))
+    print(average_age)
+
+    for i in range(len(list_with_age)):
+        element = 2017 - int(table[i][2])
+        temp = abs(2017 - int(table[i][2]) - average_age)
+        print(temp)
+        if element == average_age:
+            closest_to_average_age.append(table[i][1])
+
+        elif element > temp:
+            temp = element
+            closest_to_average_age.append(table[i][1])
+
+    print(closest_to_average_age)
+
+
+def main():
+
+    with open('persons.csv', "r") as file:
+        lines = file.readlines()
+    table = [element.replace("\n", "").split(";") for element in lines]
+
+    print(get_oldest_person(table))
+    get_persons_closest_to_average(table)

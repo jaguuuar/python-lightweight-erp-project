@@ -8,8 +8,7 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+
 # User interface module
 import ui
 # data manager module
@@ -43,27 +42,28 @@ def start_module():
         ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        
-        
+
         is_menu_stores = True
-        while is_menu_store:
+        while is_menu_stores:
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_stores = False
             elif chose_menu_number == "2":
                 add(table)
-                is_menu_store = False
+                is_menu_stores = False
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_store = False
+                is_menu_stores = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_stores = False
             elif chose_menu_number == "5":
                 get_counts_by_manufacturers(table)
             elif chose_menu_number == "6":
                 get_average_by_manufacturer(table, manufacturer)
             elif chose_menu_number == "0":
-                is_menu_store = False 
+                is_menu_stores = False
                 is_not_main_menu = False
 
 def show_table(table):
@@ -77,9 +77,8 @@ def show_table(table):
         None
     """
 
-    # your code
-
-    pass
+    title_list = ['ID', 'TITLE', 'MANUFACTURER', 'PRICE', 'IN_STOCK']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -92,8 +91,10 @@ def add(table):
     Returns:
         Table with a new record
     """
+    inputs = ['Enter title: ', 'Enter manufacturer: ',
+    'Enter price: ', 'Enter in stock: ']
 
-    # your code
+    table = common.add_record(table, inputs)
 
     return table
 
@@ -111,8 +112,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 
@@ -130,6 +130,9 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter title: ', 'Enter manufacturer: ',
+    'Enter price: ', 'Enter in stock: ']
+
 
     inputs = ['Enter title: ', 'Enter manufacturer: ','Enter price: ','Enter how many are in stock: ']
     inputs_entered = ui.get_inputs(inputs,'Update your record')
@@ -142,13 +145,11 @@ def update(table, id_):
 
     data_manager.write_table_to_file("store/games.csv", table)
 
+    table = common.update_record(table, inputs, id_)
+
+
     return table
 
-''' Above three lines should be deleted at the end of our coding!'''
-
-table = data_manager.get_table_from_file('store/games.csv')
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 
 # special functions:
@@ -157,16 +158,33 @@ print(update(table, us_input[0]))
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
+    manufacturers = []
+    for record in table:
+        if record[2] not in manufacturers:
+            manufacturers.append(record[2])
 
-    # your code
+    games_counts = {}
+    for manufacturer in manufacturers:
+        counts_sum = 0
+        for record in table:
+            if manufacturer in record:
+                counts_sum += 1
+        games_counts[manufacturer] = counts_sum
 
-    pass
+    return games_counts
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
+    stock_sum = 0
+    game_count = 0
+    for record in table:
+        for manufacturer in record:
+            if manufacturer in record:
+                stock_sum += int(record[4])
+                game_count += 1
 
-    # your code
+    average_games_in_stock = round(stock_sum / game_count, 2)
 
-    pass
+    return average_games_in_stock

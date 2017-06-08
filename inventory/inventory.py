@@ -9,9 +9,11 @@
 
 # importing everything you need
 import os
+
 import sys
 
 import time
+
 
 # User interface module
 import ui
@@ -30,7 +32,6 @@ def start_module():
     Returns:
         None
     """
-
     table = data_manager.get_table_from_file('inventory/inventory.csv')
 
     is_not_main_menu = True
@@ -58,11 +59,13 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "3":
                 table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_inventory = False # break i false obie opcje dzialaja, wraca do inventory menu
+                is_menu_inventory = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_inventory = False
             elif chose_menu_number == "5":
-                get_available_items(table)
+                result = get_available_items(table)
+                ui.print_result(result, 'exceeded their durability')
                 is_menu_inventory = False
             elif chose_menu_number == "6":
                 get_average_durability_by_manufacturers(table)
@@ -82,7 +85,8 @@ def show_table(table):
     Returns:
         None
     """
-    print(table)
+    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE_DATE', 'DURABILITY']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -95,7 +99,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-<<<<<<< HEAD
+
     # inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
     # 'Enter purchase date: ', 'Enter durability: ']
     #
@@ -104,7 +108,7 @@ def add(table):
     #
     # return table
 
-<<<<<<< HEAD
+
     inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
 
@@ -112,17 +116,19 @@ def add(table):
     table.append(new_record)
 
 
-=======
+
 
     inputs = ['Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
 
     table = common.add_record(table, inputs)
->>>>>>> c830f778b11929f1b85c2ec9acbfbb99bfde0d6f
+
+
     return table
-=======
+
     pass
->>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
+
+
 
 def remove(table, id_):
     """
@@ -135,23 +141,21 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-<<<<<<< HEAD
 
-<<<<<<< HEAD
     id_ = ''.join(id_)
 
     for record in table:
         if record[0] == id_:
             table.remove(record)
-=======
+
     table = common.remove_record(table, id_)
->>>>>>> c830f778b11929f1b85c2ec9acbfbb99bfde0d6f
+
 
     return table
-=======
+
     #inputs = ['Enter id: ']
     #del_record = ui.get_inputs(inputs, 'Remove record')
->>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
+
 
     # for record in table:
     #     if record[0] == id_:
@@ -172,6 +176,9 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter manufacturer: ',
+    'Enter purhase date: ','Enter durability: ']
+
 
     inputs = ['Enter name of object: ', 'Enter name of manufacturer: ','Enter purhase date: ','Enter durability: ']
     inputs_entered = ui.get_inputs(inputs,'Update your record')
@@ -184,13 +191,11 @@ def update(table, id_):
 
     data_manager.write_table_to_file("inventory.csv", table)
 
+    table = common.update_record(table, inputs, id_)
+
+
     return table
 
-''' Above three lines should be deleted at the end of our coding!'''
-
-table = data_manager.get_table_from_file('inventory/inventory.csv')
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 
 # special functions:
@@ -229,7 +234,6 @@ def get_average_durability_by_manufacturers(table):
             if manufacturer in record:
                 durability_sum += int(record[4])
                 manu_count += 1
-
-        average_durability[manufacturer] = durability_sum / manu_count
+        average_durability[manufacturer] = round(durability_sum / manu_count, 2)
 
     return average_durability

@@ -33,6 +33,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('crm/customers.csv')
 
     table = data_manager.get_table_from_file('crm/customers.csv')
 
@@ -46,7 +47,7 @@ def start_module():
             "(4) Update",
             "(5) Get longest name id",
             "(6) Get subscribed emails"]
-            
+
 
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
@@ -58,6 +59,7 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_crm = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_crm = False
@@ -66,12 +68,13 @@ def start_module():
                 is_menu_crm = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_crm = False
             elif chose_menu_number == "5":
                 get_longest_name_id(table)
             elif chose_menu_number == "6":
                 get_subscribed_emails(table)
             elif chose_menu_number == "0":
-                is_menu_crm = False 
+                is_menu_crm = False
                 is_not_main_menu = False
 
 
@@ -88,7 +91,8 @@ def show_table(table):
 
     # your code
 
-    pass
+    title_list = ['ID', 'NAME', 'EMAIL', 'SUBSCRIBED']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -101,8 +105,9 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter name: ', 'Enter email: ',
+    'Enter subscribed: ']
+    table = common.add_record(table, inputs)
 
     return table
     pass
@@ -119,8 +124,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
     pass
@@ -137,6 +141,9 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter email: ',
+    'Enter subscribed: ']
+
 
     inputs = ['Enter Name and surname: ', 'Enter e-mail: ', 'Is that person subscribed to the newsletter? )(1/0 = yes/not) ']
     inputs_entered = ui.get_inputs(inputs,'Update your record')
@@ -148,6 +155,9 @@ def update(table, id_):
                 element[j+1] = inputs_entered[j]
 
     data_manager.write_table_to_file("crm/customers.csv", table)
+
+    table = common.update_record(table, inputs, id_)
+
 
     return table
     pass
@@ -204,9 +214,7 @@ def get_longest_name_id(table):
 
 
 
-table = data_manager.get_table_from_file("customers.csv")
-get_longest_name_id(table)
-    
+
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -218,6 +226,4 @@ def get_subscribed_emails(table):
     return(subscribed_to_newsletter_list)
     
 
-table = data_manager.get_table_from_file("customers.csv")
-get_longest_name_id(table)
-get_subscribed_emails(table)
+

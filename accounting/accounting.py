@@ -10,8 +10,6 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -29,6 +27,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('accounting/items.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -42,16 +41,16 @@ def start_module():
             "(6) Average amount"]
 
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
-        
+
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('accounting/items.csv')
 
         is_menu_accounting = True
         while is_menu_accounting:
-        
+
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_accounting = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_accounting = False
@@ -60,14 +59,14 @@ def start_module():
                 is_menu_accounting = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_accounting = False
             elif chose_menu_number == "5":
                 which_year_max(table)
             elif chose_menu_number == "6":
                 avg_amount(table, year)
             elif chose_menu_number == "0":
-                is_menu_accounting = False 
+                is_menu_accounting = False
                 is_not_main_menu = False
-
 
 
 def show_table(table):
@@ -76,12 +75,11 @@ def show_table(table):
 
     Args:
         table: list of lists to be displayed.
-
     Returns:
         None
     """
-
-    pass
+    title_list = ['ID', 'MONTH', 'DAY', 'YEAR', 'TYPE', 'AMOUNT']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -94,12 +92,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter moth: ', 'Enter day: ',
+    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    table = common.add_record(table, inputs)
 
     return table
     pass
-
 
 def remove(table, id_):
     """
@@ -112,8 +110,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
     pass
@@ -131,6 +128,8 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter moth: ', 'Enter day: ',
+    'Enter year: ', 'Enter type: ', 'Enter amount: ']
 
     inputs = ['Enter month: ', 'Enter day: ', 'Enter year:', 'Enter type: ', 'Enter amount: ']
     inputs_entered = ui.get_inputs(inputs,'Update your record')
@@ -146,9 +145,12 @@ def update(table, id_):
     return table
 
 
-table = data_manager.get_table_from_file("items.csv")
-us_input = ui.get_inputs(['Enter ID: '],"hello")
-#print(update(table, us_input[0]))
+
+
+    table = common.update_record(table, inputs, id_)
+
+    return table
+
 
 
 
