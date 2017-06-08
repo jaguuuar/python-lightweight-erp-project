@@ -49,6 +49,18 @@ def generate_random(table):
 
     return generated
 
-    # your code
 
-    return generated
+
+def insertion_sort(list_to_sort):
+    for number in range (1, len(list_to_sort)):
+        current_number = list_to_sort[number]
+        element = number - 1
+
+    while element >= 0 and list_to_sort[element] > current_number:
+        list_to_sort[element+1] = list_to_sort[element]
+        element -=1
+
+    list_to_sort[element+1] = current_number
+
+
+    return list_to_sort
