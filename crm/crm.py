@@ -25,6 +25,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('crm/customers.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -41,7 +42,6 @@ def start_module():
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('crm/customers.csv')
 
         is_menu_crm = True
         while is_menu_crm:
@@ -57,6 +57,7 @@ def start_module():
                 is_menu_crm = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_crm = False
             elif chose_menu_number == "5":
                 get_longest_name_id(table)
             elif chose_menu_number == "6":
@@ -127,8 +128,10 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter email: ',
+    'Enter subscribed: ']
 
-    # your code
+    table = common.update_record(table, inputs, id_)
 
     return table
 

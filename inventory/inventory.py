@@ -9,10 +9,6 @@
 
 # importing everything you need
 import os
-import sys
-import time
-sys.path.append('/home/kamil/Dokumenty/srodda/python-lightweight-erp-project-do_you_even_code_bro')
-
 # User interface module
 import ui
 # data manager module
@@ -30,7 +26,6 @@ def start_module():
     Returns:
         None
     """
-
     table = data_manager.get_table_from_file('inventory/inventory.csv')
 
     is_not_main_menu = True
@@ -58,11 +53,13 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "3":
                 table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_inventory = False  # break i false obie opcje dzialaja, wraca do inventory menu
+                is_menu_inventory = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_inventory = False
             elif chose_menu_number == "5":
-                get_available_items(table)
+                result = get_available_items(table)
+                ui.print_result(result, 'exceeded their durability')
                 is_menu_inventory = False
             elif chose_menu_number == "6":
                 get_average_durability_by_manufacturers(table)
@@ -96,7 +93,9 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter name: ', 'Enter manufacturer: ', 'Enter purchase date: ', 'Enter durability: ']
+    inputs = ['Enter name: ', 'Enter manufacturer: ',
+    'Enter purchase date: ', 'Enter durability: ']
+
     table = common.add_record(table, inputs)
 
     return table
@@ -129,8 +128,10 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter manufacturer: ',
+    'Enter purhase date: ','Enter durability: ']
 
-    # your code
+    table = common.update_record(table, inputs, id_)
 
     return table
 
