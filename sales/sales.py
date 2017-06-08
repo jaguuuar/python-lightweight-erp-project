@@ -40,32 +40,33 @@ def start_module():
             "(6) Get items sold between"]
 
         ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
-        
-        
+
+
         chose_menu_number = input()
         table = data_manager.get_table_from_file('sales/sales.csv')
 
         is_menu_sales = True
         while is_menu_sales:
-        
+
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_sales = False
             elif chose_menu_number == "2":
                 add(table)
-                is_menu_sales = False 
+                is_menu_sales = False
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_sales = False 
+                is_menu_sales = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
             elif chose_menu_number == "5":
                 get_lowest_price_item_id(table)
+                
             elif chose_menu_number == "6":
                 get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
             elif chose_menu_number == "0":
-                is_menu_sales = False 
+                is_menu_sales = False
                 is_not_main_menu = False
-
 
 
 def show_table(table):
@@ -79,9 +80,8 @@ def show_table(table):
         None
     """
 
-    # your code
-
-    pass
+    title_list = ['ID', 'TITLE', 'PRICE', 'MONTH', 'DAY', 'YEAR']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -94,8 +94,9 @@ def add(table):
     Returns:
         Table with a new record
     """
-
-    # your code
+    inputs = ['Enter title: ', 'Enter price: ',
+    'Enter month: ', 'Enter day: ', 'Enter year: ']
+    table = common.add_record(table, inputs)
 
     return table
 
@@ -111,8 +112,7 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
+    table = common.remove_record(table, id_)
 
     return table
 
@@ -142,9 +142,38 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first by descending alphabetical order
 def get_lowest_price_item_id(table):
 
-    # your code
+    lowest = int(table[0][2])
+    lowest_price = []
 
-    pass
+    for j in range(len(table)):
+        element = table[j][2]
+        if int(element) < int(lowest):
+            lowest = element
+
+    for i in range(len(table)):
+        element = table[i][2]
+        if element == lowest:
+            lowest_price.append(table[i][1].upper())
+
+
+
+    # insertion sort to find descending alphabetical order longest name
+    for number in range (1, len(lowest_price)):
+        current_number = lowest_price[number]
+        element = number - 1
+
+        while element >= 0 and lowest_price[element] > current_number:
+            lowest_price[element+1] = lowest_price[element]
+            element -=1
+
+        lowest_price[element+1] = current_number
+
+
+    for row in table:
+        if lowest_price[0] == row[1].upper():
+            id_ = row[0]
+
+    return id_
 
 
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)
