@@ -52,6 +52,7 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_sales = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_sales = False
@@ -69,7 +70,6 @@ def start_module():
                 is_not_main_menu = False
 
 
-
 def show_table(table):
     """
     Display a table
@@ -81,9 +81,8 @@ def show_table(table):
         None
     """
 
-    # your code
-
-    pass
+    title_list = ['ID', 'TITLE', 'PRICE', 'MONTH', 'DAY', 'YEAR']
+    ui.print_table(table, title_list)
 
 
 def add(table):

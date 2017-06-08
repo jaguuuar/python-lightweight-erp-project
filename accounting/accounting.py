@@ -71,7 +71,6 @@ def start_module():
 
     pass
 
-
 def show_table(table):
     """
     Display a table
@@ -81,7 +80,7 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'NAME', 'YEAR', 'DKKS', 'IOIADS', 'DSA']
+    title_list = ['ID', 'MONTH', 'DAY', 'YEAR', 'TYPE', 'AMOUNT']
     ui.print_table(table, title_list)
 
 

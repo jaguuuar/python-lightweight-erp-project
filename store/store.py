@@ -8,7 +8,8 @@
 
 # importing everything you need
 import os
-import syssys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
+import sys
+sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 
 import time
 # User interface module
@@ -46,16 +47,17 @@ def start_module():
         table = data_manager.get_table_from_file('store/games.csv')
 
         is_menu_stores = True
-        while is_menu_store:
+        while is_menu_stores:
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_stores = False
             elif chose_menu_number == "2":
                 add(table)
-                is_menu_store = False
+                is_menu_stores = False
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_store = False
+                is_menu_stores = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
             elif chose_menu_number == "5":
@@ -63,7 +65,7 @@ def start_module():
             elif chose_menu_number == "6":
                 get_average_by_manufacturer(table, manufacturer)
             elif chose_menu_number == "0":
-                is_menu_store = False
+                is_menu_stores = False
                 is_not_main_menu = False
 
 def show_table(table):
@@ -77,9 +79,8 @@ def show_table(table):
         None
     """
 
-    # your code
-
-    pass
+    title_list = ['ID', 'TITLE', 'MANUFACTURER', 'PRICE', 'IN_STOCK']
+    ui.print_table(table, title_list)
 
 
 def add(table):

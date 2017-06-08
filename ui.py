@@ -66,7 +66,6 @@ def make_table(table, title_list):
         print(' ')
 
 
-
 def print_table(table, title_list):
 
     """
@@ -88,6 +87,7 @@ def print_table(table, title_list):
     """
     # data = [titles] + list(zip(key, values))
     make_table(table, title_list)
+    table.remove(table[0])
 
 
 def print_result(result, label):

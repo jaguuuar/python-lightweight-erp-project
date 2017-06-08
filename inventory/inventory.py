@@ -58,7 +58,7 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "3":
                 table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_inventory = False # break i false obie opcje dzialaja, wraca do inventory menu
+                is_menu_inventory = False  # break i false obie opcje dzialaja, wraca do inventory menu
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
             elif chose_menu_number == "5":
@@ -82,7 +82,8 @@ def show_table(table):
     Returns:
         None
     """
-    print(table)
+    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE_DATE', 'DURABILITY']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -95,6 +96,7 @@ def add(table):
     Returns:
         Table with a new record
     """
+<<<<<<< HEAD
 <<<<<<< HEAD
     # inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
     # 'Enter purchase date: ', 'Enter durability: ']
@@ -114,6 +116,9 @@ def add(table):
 =======
     inputs = ['Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
+=======
+    inputs = ['Enter name: ', 'Enter manufacturer: ', 'Enter purchase date: ', 'Enter durability: ']
+>>>>>>> 22c0071825adb7f6c80c08e6fdc7f86014213c6d
     table = common.add_record(table, inputs)
 >>>>>>> 93b074052b7be066afa96bef1a621b8ecc2ff9a4
 
