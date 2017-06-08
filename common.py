@@ -22,7 +22,6 @@ def generate_random(table):
     Returns:
         Random and unique string
     """
-
     id_list=[]
     for record in table:
         id_list.append(record[0])
@@ -47,6 +46,7 @@ def generate_random(table):
             break
 
     return generated
+
 
 def add_record(table, inputs_list):
     new_id = generate_random(table)
