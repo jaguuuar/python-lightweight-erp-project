@@ -59,7 +59,7 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "5":
                 result = get_available_items(table)
-                ui.print_result(result, 'exceeded their durability')
+                ui.print_result('exceeded their durability', result)
                 is_menu_inventory = False
             elif chose_menu_number == "6":
                 get_average_durability_by_manufacturers(table)

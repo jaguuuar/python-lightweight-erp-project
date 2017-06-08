@@ -102,7 +102,7 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
-    print('{}{}'.format(lable, result))
+    print('{}{}'.format(label, result))
 
 
 def print_menu(title, list_options, exit_message):
@@ -152,10 +152,7 @@ def get_inputs(list_labels, title):
         List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
-
-
     inputs = []
-
 
     print(title)
     for enter_input in list_labels:
