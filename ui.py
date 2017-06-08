@@ -131,7 +131,6 @@ def print_menu(title, list_options, exit_message):
     print(title, "\n" , option_from_menu, "\n" , exit_message)
 
 
-
 def get_inputs(list_labels, title):
     """
     Gets list of inputs from the user.
