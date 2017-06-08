@@ -20,10 +20,10 @@ def start_module():
     Starts this module and displays its menu.
     User can access default special features from here.
     User can go back to main menu from here.
-
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('hr/persons.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -39,13 +39,13 @@ def start_module():
         ui.print_menu("Human resources manager menu: ", human_resources_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('hr/persons.csv')
 
         is_menu_hr = True
         while is_menu_hr:
 
             if chose_menu_number == "1":
                 show_table(table)
+                is_menu_hr = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_hr = False
@@ -56,10 +56,12 @@ def start_module():
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
                 is_menu_hr = False
             elif chose_menu_number == "5":
-                get_oldest_person(table)
+                result = get_oldest_person(table)
+                ui.print_result(result, 'The oldest person is (or are): \n')
                 is_menu_hr = False
             elif chose_menu_number == "6":
-                get_persons_closest_to_average(table)
+                result = get_persons_closest_to_average(table)
+                ui.print_result(result, 'Person closest to the average age is (or are): \n')
                 is_menu_hr = False
             elif chose_menu_number == "0":
                 is_menu_hr = False
@@ -70,15 +72,14 @@ def start_module():
 def show_table(table):
     """
     Display a table
-
     Args:
         table: list of lists to be displayed.
-
     Returns:
         None
     """
 
-    # your code
+    title_list = ['ID', 'NAME', 'BIRTH_DATE']
+    ui.print_table(table, title_list)
 
     pass
 
@@ -86,10 +87,8 @@ def show_table(table):
 def add(table):
     """
     Asks user for input and adds it into the table.
-
     Args:
         table: table to add new record to
-
     Returns:
         Table with a new record
     """
@@ -102,11 +101,9 @@ def add(table):
 def remove(table, id_):
     """
     Remove a record with a given id from the table.
-
     Args:
         table: table to remove a record from
         id_ (str): id of a record to be removed
-
     Returns:
         Table without specified record.
     """
@@ -118,16 +115,15 @@ def remove(table, id_):
 def update(table, id_):
     """
     Updates specified record in the table. Ask users for new data.
-
     Args:
         table: list in which record should be updated
         id_ (str): id of a record to update
-
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter birth date: ']
 
-    # your code
+    table = common.update_record(table, inputs, id_)
 
     return table
 
@@ -139,15 +135,58 @@ def update(table, id_):
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
 
-    # your code
+    oldest = int(table[0][2])
+    oldest_people = []
 
-    pass
+    for j in range(len(table)):
+        element = table[j][2]
+        if int(element) < int(oldest):
+            oldest = element
+            name = table[j][1]
+
+    for i in range(len(table)):
+        element = table[i][2]
+        if element == oldest:
+            oldest_people.append([table[i][1]])  # GRZEGORZ: zmodyfikowałem tutaj dodając [], żeby się dobrze wyświetlało.
+
+    return oldest_people
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
 
-    # your code
+    summed_age = 0
+    list_with_age = []
+    closest_to_average_age = []
 
-    pass
+    for j in range(len(table)):
+        element = 2017 - int(table[j][2])
+        list_with_age.append(element)
+        summed_age += element
+
+#    print(list_with_age)
+    average_age = round(summed_age/len(table))
+#    print(average_age)
+
+    for i in range(len(list_with_age)):
+        element = 2017 - int(table[i][2])
+        temp = abs(2017 - int(table[i][2]) - average_age)
+#        print(temp)
+        if element == average_age:
+            closest_to_average_age.append([table[i][1]]) # GRZEGORZ: zmodyfikowałem tutaj dodając [], żeby się dobrze wyświetlało.
+
+        elif element > temp:
+            temp = element
+            closest_to_average_age.append([table[i][1]]) # GRZEGORZ: zmodyfikowałem tutaj dodając [], żeby się dobrze wyświetlało.
+
+    return closest_to_average_age
+
+# def main():
+#
+#     with open('persons.csv', "r") as file:
+#         lines = file.readlines()
+#     table = [element.replace("\n", "").split(";") for element in lines]
+#
+#     print(get_oldest_person(table))
+#     get_persons_closest_to_average(table)
