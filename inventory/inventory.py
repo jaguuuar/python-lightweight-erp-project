@@ -9,10 +9,6 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
-import time
-
 # User interface module
 import ui
 # data manager module
@@ -30,7 +26,6 @@ def start_module():
     Returns:
         None
     """
-
     table = data_manager.get_table_from_file('inventory/inventory.csv')
 
     is_not_main_menu = True
@@ -58,14 +53,17 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "3":
                 table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_inventory = False  # break i false obie opcje dzialaja, wraca do inventory menu
+                is_menu_inventory = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_inventory = False
             elif chose_menu_number == "5":
-                get_available_items(table)
+                result = get_available_items(table)
+                ui.print_result(result, "Your available items are: ( ID, Name, Manufacturer, Purhase date, Durability)\n")
                 is_menu_inventory = False
             elif chose_menu_number == "6":
-                get_average_durability_by_manufacturers(table)
+                result = get_average_durability_by_manufacturers(table)
+                ui.print_result(result, 'Average durability by manufacturer: \n')
                 is_menu_inventory = False
             elif chose_menu_number == "0":
                 is_menu_inventory = False
@@ -82,9 +80,8 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE_DATE', 'DURABILITY']
-    ui.print_table(table, title_list)
-
+    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE DATE', 'DURABILITY']
+    ui.make_table(table, title_list)
 
 def add(table):
     """
@@ -96,36 +93,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-<<<<<<< HEAD
-<<<<<<< HEAD
-    # inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
-    # 'Enter purchase date: ', 'Enter durability: ']
-    #
-    # new_record = ui.get_inputs(inputs, 'Add new record')
-    # table.append(new_record)
-    #
-    # return table
-
-<<<<<<< HEAD
-    inputs = ['Enter id: ', 'Enter name: ', 'Enter manufacturer: ',
-    'Enter purchase date: ', 'Enter durability: ']
-
-    new_record = ui.get_inputs(inputs, 'Add new record')
-    table.append(new_record)
-
-=======
     inputs = ['Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
-=======
-    inputs = ['Enter name: ', 'Enter manufacturer: ', 'Enter purchase date: ', 'Enter durability: ']
->>>>>>> 22c0071825adb7f6c80c08e6fdc7f86014213c6d
+
     table = common.add_record(table, inputs)
->>>>>>> 93b074052b7be066afa96bef1a621b8ecc2ff9a4
 
     return table
-=======
-    pass
->>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
 
 
 def remove(table, id_):
@@ -139,31 +112,10 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-    id_ = ''.join(id_)
-
-    for record in table:
-        if record[0] == id_:
-            table.remove(record)
-=======
     table = common.remove_record(table, id_)
->>>>>>> 93b074052b7be066afa96bef1a621b8ecc2ff9a4
 
     return table
-=======
-    #inputs = ['Enter id: ']
-    #del_record = ui.get_inputs(inputs, 'Remove record')
->>>>>>> ce7cef5d7c0a6d8142a15ef3e7d75a597156c778
 
-    # for record in table:
-    #     if record[0] == id_:
-    #     table.remove(record)
-    #
-    # return table
-    #
-    pass
 
 def update(table, id_):
     """
@@ -176,25 +128,12 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter manufacturer: ',
+    'Enter purhase date: ','Enter durability: ']
 
-    inputs = ['Enter name of object: ', 'Enter name of manufacturer: ','Enter purhase date: ','Enter durability: ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-
-
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,4):
-                element[j+1] = inputs_entered[j]
-
-    data_manager.write_table_to_file("inventory.csv", table)
+    table = common.update_record(table, inputs, id_)
 
     return table
-
-''' Above three lines should be deleted at the end of our coding!'''
-
-table = data_manager.get_table_from_file("inventory.csv")
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 
 # special functions:

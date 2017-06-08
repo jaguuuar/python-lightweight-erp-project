@@ -9,9 +9,8 @@
 # importing everything you need
 import os
 import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
-
 import time
+sys.path.append('/home/kamil/Dokumenty/srodda/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -46,26 +45,32 @@ def start_module():
         chose_menu_number = input()
         table = data_manager.get_table_from_file('store/games.csv')
 
-        is_menu_stores = True
-        while is_menu_stores:
+        is_menu_store = True
+        while is_menu_store:
 
             if chose_menu_number == "1":
                 show_table(table)
-                is_menu_stores = False
             elif chose_menu_number == "2":
                 add(table)
-                is_menu_stores = False
+                is_menu_store = False
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_stores = False
+                is_menu_store = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_store = False
             elif chose_menu_number == "5":
-                get_counts_by_manufacturers(table)
+                result = get_counts_by_manufacturers(table)
+                ui.print_result(result, "Number of games that are available of each manufacturer: ")
+                is_menu_store = False
             elif chose_menu_number == "6":
-                get_average_by_manufacturer(table, manufacturer)
+                list_labels = ['Which manufacturer you want to check? ']
+                manufacturer = ui.get_inputs(list_labels, 'One question for you! \n')
+                result = get_average_by_manufacturer(table, manufacturer)
+                ui.print_result(result, "Number of games that are available of each manufacturer: ")
+                is_menu_store = False
             elif chose_menu_number == "0":
-                is_menu_stores = False
+                is_menu_store = False
                 is_not_main_menu = False
 
 def show_table(table):
@@ -79,8 +84,9 @@ def show_table(table):
         None
     """
 
-    title_list = ['ID', 'TITLE', 'MANUFACTURER', 'PRICE', 'IN_STOCK']
-    ui.print_table(table, title_list)
+    # your code
+
+    pass
 
 
 def add(table):
@@ -99,8 +105,6 @@ def add(table):
 
     return table
 
-    pass
-
 
 def remove(table, id_):
     """
@@ -117,8 +121,6 @@ def remove(table, id_):
 
     return table
 
-    pass
-
 
 def update(table, id_):
     """
@@ -132,24 +134,9 @@ def update(table, id_):
         table with updated record
     """
 
-    inputs = ['Enter title: ', 'Enter manufacturer: ','Enter price: ','Enter how many are in stock: ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-
-
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,4):
-                element[j+1] = inputs_entered[j]
-
-    data_manager.write_table_to_file("games.csv", table)
+    # your code
 
     return table
-
-''' Above three lines should be deleted at the end of our coding!'''
-
-table = data_manager.get_table_from_file("games.csv")
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 
 # special functions:

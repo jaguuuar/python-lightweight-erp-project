@@ -5,10 +5,8 @@
 # birth_date: number (year)
 
 
-# importing everything you need      ODKOMENTOWAC TE DOCSTRinGI!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -48,7 +46,6 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
-                is_menu_hr = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_hr = False
@@ -57,10 +54,13 @@ def start_module():
                 is_menu_hr = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_hr = False
             elif chose_menu_number == "5":
                 get_oldest_person(table)
+                is_menu_hr = False
             elif chose_menu_number == "6":
                 get_persons_closest_to_average(table)
+                is_menu_hr = False
             elif chose_menu_number == "0":
                 is_menu_hr = False
                 is_not_main_menu = False
@@ -78,8 +78,7 @@ def show_table(table):
         None
     """
 
-    title_list = ['ID', 'NAME', 'BIRTH_DATE']
-    ui.print_table(table, title_list)
+    # your code
 
     pass
 
@@ -99,8 +98,6 @@ def add(table):
 
     return table
 
-    pass
-
 
 def remove(table, id_):
     """
@@ -117,8 +114,6 @@ def remove(table, id_):
 
     return table
 
-    pass
-
 
 def update(table, id_):
     """
@@ -132,24 +127,10 @@ def update(table, id_):
         table with updated record
     """
 
-    inputs = ['Enter Name and surname: ', 'Enter year of birth: ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-
-
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,2):
-                element[j+1] = inputs_entered[j]
-
-    data_manager.write_table_to_file("persons.csv", table)
+    # your code
 
     return table
 
-''' Above three lines should be deleted at the end of our coding!'''
-
-table = data_manager.get_table_from_file("persons.csv")
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 # special functions:
 # ------------------
@@ -158,61 +139,15 @@ print(update(table, us_input[0]))
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
 
-    oldest = int(table[0][2])
-    oldest_people = []
+    # your code
 
-    for j in range(len(table)):
-        element = table[j][2]
-        if int(element) < int(oldest):
-            oldest = element
-            name = table[j][1]
-
-    for i in range(len(table)):
-        element = table[i][2]
-        if element == oldest:
-            oldest_people.append(table[i][1])
-
-    return oldest_people
+    pass
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
 
-    summed_age = 0
-    list_with_age = []
-    closest_to_average_age = []
+    # your code
 
-    for j in range(len(table)):
-        element = 2017 - int(table[j][2])
-        list_with_age.append(element)
-        summed_age += element
-
-    print(list_with_age)
-    average_age = round(summed_age/len(table))
-    print(average_age)
-
-    for i in range(len(list_with_age)):
-        element = 2017 - int(table[i][2])
-        temp = abs(2017 - int(table[i][2]) - average_age)
-        print(temp)
-        if element == average_age:
-            closest_to_average_age.append(table[i][1])
-
-        elif element > temp:
-            temp = element
-            closest_to_average_age.append(table[i][1])
-
-    print(closest_to_average_age)
-
-
-def main():
-
-    with open('persons.csv', "r") as file:
-        lines = file.readlines()
-    table = [element.replace("\n", "").split(";") for element in lines]
-
-    print(get_oldest_person(table))
-    get_persons_closest_to_average(table)
-
-#main()
+    pass

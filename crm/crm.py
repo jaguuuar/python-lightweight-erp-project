@@ -8,20 +8,12 @@
 
 # importing everything you need
 import os
-
-#import above is for test
-import sys
-sys.path.append('/home/sylwia/Codecool/TW_after_checkpoint1/TW6/python-lightweight-erp-project-do_you_even_code_bro')
-
-
 # User interface module
 import ui
 # data manager module
 import data_manager
 # common module
 import common
-
-
 
 
 def start_module():
@@ -33,8 +25,8 @@ def start_module():
     Returns:
         None
     """
-
     table = data_manager.get_table_from_file('crm/customers.csv')
+
     is_not_main_menu = True
     while is_not_main_menu:
 
@@ -51,13 +43,11 @@ def start_module():
 
         chose_menu_number = input()
 
-
         is_menu_crm = True
         while is_menu_crm:
 
             if chose_menu_number == "1":
                 show_table(table)
-                is_menu_crm = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_crm = False
@@ -66,10 +56,15 @@ def start_module():
                 is_menu_crm = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_crm = False
             elif chose_menu_number == "5":
-                get_longest_name_id(table)
+                result = get_longest_name_id(table)
+                ui.print_result(result, 'The ID of the customer with the longest name: ')
+                is_menu_crm = False
             elif chose_menu_number == "6":
-                get_subscribed_emails(table)
+                result = get_subscribed_emails(table)
+                ui.print_result(result, 'Customers that subscribed to the newsletter: ')
+                is_menu_crm = False
             elif chose_menu_number == "0":
                 is_menu_crm = False
                 is_not_main_menu = False
@@ -88,8 +83,7 @@ def show_table(table):
 
     # your code
 
-    title_list = ['ID', 'NAME', 'EMAIL', 'SUBSCRIBED']
-    ui.print_table(table, title_list)
+    pass
 
 
 def add(table):
@@ -107,7 +101,6 @@ def add(table):
     table = common.add_record(table, inputs)
 
     return table
-    pass
 
 
 def remove(table, id_):
@@ -124,7 +117,6 @@ def remove(table, id_):
     table = common.remove_record(table, id_)
 
     return table
-    pass
 
 
 def update(table, id_):
@@ -138,25 +130,12 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter name: ', 'Enter email: ',
+    'Enter subscribed: ']
 
-    inputs = ['Enter Name and surname: ', 'Enter e-mail: ', 'Is that person subscribed to the newsletter? )(1/0 = yes/not) ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-
-
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,3):
-                element[j+1] = inputs_entered[j]
-
-    data_manager.write_table_to_file("customers.csv", table)
+    table = common.update_record(table, inputs, id_)
 
     return table
-    pass
-
-
-table = data_manager.get_table_from_file("customers.csv")
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 
 # special functions:
@@ -167,57 +146,47 @@ print(update(table, us_input[0]))
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
 
-    #take from table column with names and add to customer_names list
+    # take from table column with names and add to customer_names list
 
-    customer_names=[table[i][1] for i in range(len(table))] #list with all names
+    customer_names = [table[i][1] for i in range(len(table))]  # list with all names
 
     name = ""
     for row in table:
         if len(row[1]) > len(name):
-            len_list = [table[i][1] for i in range(len(table)) if len(row[1]) == len(table[i][1])] #list with the longest names
+            len_list = [table[i][1] for i in range(len(table)) if len(row[1]) == len(table[i][1])]  # list with the longest names
             name = row[1]
-            #list with the longest names in big letters
-            upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])] 
+            # list with the longest names in big letters
+            upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])]
 
+    # common.insertion_sort(upper_list)
 
+    # insertion sort to find descending alphabetical order longest name
 
-
-    #insertion sort to find descending alphabetical order longest name
-    for number in range (1, len(upper_list)):
+    for number in range(1, len(upper_list)):
         current_number = upper_list[number]
         element = number - 1
 
         while element >= 0 and upper_list[element] > current_number:
             upper_list[element+1] = upper_list[element]
-            element -=1
+            element -= 1
 
         upper_list[element+1] = current_number
+#    print(upper_list)
 
-
-    #take id the longest name by descending alphabetical order 
+    # take id the longest name by descending alphabetical order
     for row in table:
         if upper_list[0] == row[1].upper():
             id_ = row[0]
 
-
     return id_
 
-
-
-table = data_manager.get_table_from_file("customers.csv")
-get_longest_name_id(table)
-    
+    # the question: Which customers has subscribed to the newsletter?
+    # return type: list of strings (where string is like email+separator+name, separator=";")
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
 
-    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1'] #list with all id 1, 0
-    
+    subscribed_to_newsletter_list = [[table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']]  # list with all id 1, 0
     return(subscribed_to_newsletter_list)
-    
-
-table = data_manager.get_table_from_file("customers.csv")
-get_longest_name_id(table)
-get_subscribed_emails(table)

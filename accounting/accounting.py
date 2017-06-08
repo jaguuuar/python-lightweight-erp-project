@@ -10,8 +10,6 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -29,7 +27,8 @@ def start_module():
     Returns:
         None
     """
-    
+    table = data_manager.get_table_from_file('accounting/items.csv')
+
     is_not_main_menu = True
     while is_not_main_menu:
 
@@ -44,7 +43,6 @@ def start_module():
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('accounting/items.csv')
 
         is_menu_accounting = True
         while is_menu_accounting:
@@ -61,15 +59,22 @@ def start_module():
                 is_menu_accounting = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_accounting = False
             elif chose_menu_number == "5":
-                which_year_max(table)
+                result = which_year_max(table)
+                ui.print_result(result, 'Year with highest profit is: \n')
+                is_menu_accounting = False
             elif chose_menu_number == "6":
-                avg_amount(table, year)
+                list_labels = ['Which year you want to check? ']
+                year = ui.get_inputs(list_labels, 'One question for you! \n')
+                result = avg_amount(table, year)
+                ui.print_result(result, 'Average durability by manufacturer: \n')
+                is_menu_accounting = False
             elif chose_menu_number == "0":
                 is_menu_accounting = False
                 is_not_main_menu = False
 
-    pass
+
 
 def show_table(table):
     """
@@ -80,7 +85,7 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'MONTH', 'DAY', 'YEAR', 'TYPE', 'AMOUNT']
+    title_list = ['ID', 'NAME', 'YEAR', 'DKKS', 'IOIADS', 'DSA']
     ui.print_table(table, title_list)
 
 
@@ -130,24 +135,12 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter moth: ', 'Enter day: ',
+    'Enter year: ', 'Enter type: ', 'Enter amount: ']
 
-    inputs = ['Enter month: ', 'Enter day: ', 'Enter year:', 'Enter type: ', 'Enter amount: ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-
-
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,5):
-                element[j+1] = inputs_entered[j]
-
-    data_manager.write_table_to_file("customers.csv", table)
+    table = common.update_record(table, inputs, id_)
 
     return table
-#
-#
-# table = data_manager.get_table_from_file("items.csv")
-# us_input = ui.get_inputs(['Enter ID: '],"hello")
-# print(update(table, us_input[0]))
 
 
 
@@ -216,11 +209,9 @@ def avg_amount(table, year):
                 elif elements[4] == "out":
                     profit[elements[3]] += (-1 * int(elements[5]))
     for elements in table:
-        if year in elements[3]:
+        if year[0] in elements[3]:
             items_count += 1
 
-    average_amount_per_item = int((profit[year]))/items_count
+    average_amount_per_item = int((profit[year[0]]))/items_count
 
     return average_amount_per_item
-
-#przy wywoływaniu funkcji trzeba dodać input do roku!

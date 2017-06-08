@@ -48,21 +48,6 @@ def generate_random(table):
 
     return generated
 
-<<<<<<< HEAD
-def insertion_sort(list_to_sort):
-    for number in range (1, len(list_to_sort)):
-        current_number = list_to_sort[number]
-        element = number - 1
-
-    while element >= 0 and list_to_sort[element] > current_number:
-        list_to_sort[element+1] = list_to_sort[element]
-        element -=1
-
-    list_to_sort[element+1] = current_number
-
-
-    return list_to_sort
-=======
 def add_record(table, inputs_list):
     new_id = generate_random(table)
     new_record = ui.get_inputs(inputs_list, 'Add new record')
@@ -70,7 +55,6 @@ def add_record(table, inputs_list):
     table.append(new_record)
 
     return table
->>>>>>> 93b074052b7be066afa96bef1a621b8ecc2ff9a4
 
 
 def remove_record(table, id_):
@@ -78,5 +62,15 @@ def remove_record(table, id_):
     for record in table:
         if record[0] == id_:
             table.remove(record)
+
+    return table
+
+
+def update_record(table, inputs, id_):
+    for record in table:
+        if record[0] == ''.join(id_):
+            inputs_entered = ui.get_inputs(inputs,'Update your record')
+            for element in range(len(inputs)):
+                record[element+1] = inputs_entered[element]
 
     return table

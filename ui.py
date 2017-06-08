@@ -66,6 +66,7 @@ def make_table(table, title_list):
         print(' ')
 
 
+
 def print_table(table, title_list):
 
     """
@@ -87,7 +88,6 @@ def print_table(table, title_list):
     """
     # data = [titles] + list(zip(key, values))
     make_table(table, title_list)
-    table.remove(table[0])
 
 
 def print_result(result, label):
@@ -101,8 +101,21 @@ def print_result(result, label):
     Returns:
         This function doesn't return anything it only prints to console.
     """
+    if type(result) is dict:
+        print (label)
+        for keys, values in result.items():
+            print(keys, values, end='\n\n')
 
-    print('{}{}'.format(lable, result))
+
+    elif type(result) is list:
+        print(label)
+        for lists in result:
+            for elements in lists:
+                print(elements, end =" | ")
+            print("\n")
+
+    else:
+        print('{}{}'.format(label, result))
 
 
 def print_menu(title, list_options, exit_message):

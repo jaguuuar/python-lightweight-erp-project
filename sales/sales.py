@@ -10,8 +10,6 @@
 
 # importing everything you need
 import os
-import sys
-sys.path.append('/home/grzegorz/Pulpit/code/python-lightweight-erp-project-do_you_even_code_bro')
 # User interface module
 import ui
 # data manager module
@@ -52,7 +50,6 @@ def start_module():
 
             if chose_menu_number == "1":
                 show_table(table)
-                is_menu_sales = False
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_sales = False
@@ -70,6 +67,7 @@ def start_module():
                 is_not_main_menu = False
 
 
+
 def show_table(table):
     """
     Display a table
@@ -81,8 +79,9 @@ def show_table(table):
         None
     """
 
-    title_list = ['ID', 'TITLE', 'PRICE', 'MONTH', 'DAY', 'YEAR']
-    ui.print_table(table, title_list)
+    # your code
+
+    pass
 
 
 def add(table):
@@ -101,8 +100,6 @@ def add(table):
 
     return table
 
-    pass
-
 
 def remove(table, id_):
     """
@@ -119,8 +116,6 @@ def remove(table, id_):
 
     return table
 
-    pass
-
 
 def update(table, id_):
     """
@@ -134,24 +129,9 @@ def update(table, id_):
         table with updated record
     """
 
-    inputs = ['Enter title: ', 'Enter price: ','Enter month: ','Enter day: ','Enter year: ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-
-
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,5):
-                element[j+1] = inputs_entered[j]
-
-    data_manager.write_table_to_file("sales.csv", table)
+    # your code
 
     return table
-
-''' Above three lines should be deleted at the end of our coding!'''
-
-table = data_manager.get_table_from_file("sales.csv")
-us_input = ui.get_inputs(['Enter ID: '],"Hello there !!!")
-print(update(table, us_input[0]))
 
 
 # special functions:
