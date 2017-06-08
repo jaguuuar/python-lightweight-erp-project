@@ -27,6 +27,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('accounting/items.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -42,7 +43,6 @@ def start_module():
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
 
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('accounting/items.csv')
 
         is_menu_accounting = True
         while is_menu_accounting:
@@ -59,6 +59,7 @@ def start_module():
                 is_menu_accounting = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_accounting = False
             elif chose_menu_number == "5":
                 which_year_max(table)
             elif chose_menu_number == "6":
@@ -128,27 +129,12 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter moth: ', 'Enter day: ',
+    'Enter year: ', 'Enter type: ', 'Enter amount: ']
 
-    inputs = ['Enter month: ', 'Enter day: ', 'Enter year:', 'Enter type: ', 'Enter amount: ']
-    inputs_entered = ui.get_inputs(inputs,'Update your record')
-    print(inputs_entered)
-    #print(inputs_entered[0])
-    #print(inputs_entered[2])
+    table = common.update_record(table, inputs, id_)
 
-    for element in table:
-        if element[0] == id_:
-            for j in range(0,5):
-                element[j+1] = inputs_entered[j]
-
-    #print(table[0][0])
-    #print(id_)
-    #print(table)
     return table
-
-
-#table = data_manager.get_table_from_file("items.csv")
-#us_input = ui.get_inputs(['Enter ID: '],"hello")
-#print(update(table, us_input[0]))
 
 
 
