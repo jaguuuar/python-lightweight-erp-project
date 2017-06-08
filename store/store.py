@@ -65,6 +65,7 @@ def start_module():
                 is_menu_stores = False
                 is_not_main_menu = False
 
+
 def show_table(table):
     """
     Display a table

@@ -186,13 +186,3 @@ def get_persons_closest_to_average(table):
             closest_to_average_age.append(table[i][1])
 
     print(closest_to_average_age)
-
-
-def main():
-
-    with open('persons.csv', "r") as file:
-        lines = file.readlines()
-    table = [element.replace("\n", "").split(";") for element in lines]
-
-    print(get_oldest_person(table))
-    get_persons_closest_to_average(table)

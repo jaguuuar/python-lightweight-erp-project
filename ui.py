@@ -101,7 +101,22 @@ def print_result(result, label):
     Returns:
         This function doesn't return anything it only prints to console.
     """
-    pass
+
+    if type(result) is dict:
+        print (label)
+        for keys, values in result.items():
+            print(keys, values, end='\n\n')
+
+
+    elif type(result) is list:
+        print(label)
+        for lists in result:
+            for elements in lists:
+                print(elements, end =" | ")
+            print("\n")
+
+    else:
+        print('{}{}'.format(label, result))
 
 
 def print_menu(title, list_options, exit_message):
