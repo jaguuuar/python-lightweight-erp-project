@@ -40,22 +40,22 @@ def start_module():
             "(6) Get items sold between"]
 
         ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
-        
-        
+
+
         chose_menu_number = input()
         table = data_manager.get_table_from_file('sales/sales.csv')
 
         is_menu_sales = True
         while is_menu_sales:
-        
+
             if chose_menu_number == "1":
                 show_table(table)
             elif chose_menu_number == "2":
                 add(table)
-                is_menu_sales = False 
+                is_menu_sales = False
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-                is_menu_sales = False 
+                is_menu_sales = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
             elif chose_menu_number == "5":
@@ -63,7 +63,7 @@ def start_module():
             elif chose_menu_number == "6":
                 get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
             elif chose_menu_number == "0":
-                is_menu_sales = False 
+                is_menu_sales = False
                 is_not_main_menu = False
 
 
