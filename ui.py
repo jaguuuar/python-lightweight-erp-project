@@ -102,7 +102,25 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
+
     print('{}{}'.format(label, result))
+
+    if type(result) is dict:
+        print (label)
+        for keys, values in result.items():
+            print(keys, values, end='\n\n')
+
+
+    elif type(result) is list:
+        print(label)
+        for lists in result:
+            for elements in lists:
+                print(elements, end =" | ")
+            print("\n")
+
+    else:
+        print('{}{}'.format(label, result))
+
 
 
 def print_menu(title, list_options, exit_message):
@@ -132,7 +150,6 @@ def print_menu(title, list_options, exit_message):
     print(title, "\n" , option_from_menu, "\n" , exit_message)
 
 
-
 def get_inputs(list_labels, title):
     """
     Gets list of inputs from the user.
@@ -152,10 +169,7 @@ def get_inputs(list_labels, title):
         List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
-
-
     inputs = []
-
 
     print(title)
     for enter_input in list_labels:

@@ -53,21 +53,24 @@ def start_module():
                 is_menu_inventory = False
             elif chose_menu_number == "3":
                 table = remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
-<<<<<<< HEAD
+
                 is_menu_inventory = False  # break i false obie opcje dzialaja, wraca do inventory menu
-=======
+
                 is_menu_inventory = False
->>>>>>> 2cd6bcfe3b5823bad96dee487e4c33fe7c8ae61c
+
+                is_menu_inventory = False
+
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
                 is_menu_inventory = False
             elif chose_menu_number == "5":
                 result = get_available_items(table)
-<<<<<<< HEAD
+
                 ui.print_result(result, "lala")
-=======
-                print_result(result, 'exceeded their durability')
->>>>>>> 2cd6bcfe3b5823bad96dee487e4c33fe7c8ae61c
+
+
+                ui.print_result('exceeded their durability', result)
+
                 is_menu_inventory = False
             elif chose_menu_number == "6":
                 get_average_durability_by_manufacturers(table)
@@ -87,14 +90,18 @@ def show_table(table):
     Returns:
         None
     """
-<<<<<<< HEAD
+
     title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE_DATE', 'DURABILITY']
     ui.print_table(table, title_list)
 
-=======
+
     title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE DATE', 'DURABILITY']
     ui.make_table(table, title_list)
->>>>>>> 2cd6bcfe3b5823bad96dee487e4c33fe7c8ae61c
+
+    title_list = ['ID', 'NAME', 'MANUFACTURER', 'PURCHASE_DATE', 'DURABILITY']
+    ui.print_table(table, title_list)
+
+
 
 def add(table):
     """
@@ -106,13 +113,17 @@ def add(table):
     Returns:
         Table with a new record
     """
-<<<<<<< HEAD
+
     inputs = ['Enter name: ', 'Enter manufacturer: ', 'Enter purchase date: ', 'Enter durability: ']
-=======
+
     inputs = ['Enter name: ', 'Enter manufacturer: ',
     'Enter purchase date: ', 'Enter durability: ']
 
->>>>>>> 2cd6bcfe3b5823bad96dee487e4c33fe7c8ae61c
+
+    inputs = ['Enter name: ', 'Enter manufacturer: ',
+    'Enter purchase date: ', 'Enter durability: ']
+
+
     table = common.add_record(table, inputs)
 
     return table
@@ -162,7 +173,7 @@ def update(table, id_):
 # @table: list of lists
 def get_available_items(table):
     available_items = []
-    for record in table[1:]:
+    for record in table:
         exceed_year = int(record[3]) + int(record[4])
         if exceed_year >= 2017:
             available_items.append(record)

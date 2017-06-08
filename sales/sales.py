@@ -27,6 +27,7 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('sales/sales.csv')
 
     is_not_main_menu = True
     while is_not_main_menu:
@@ -41,9 +42,7 @@ def start_module():
 
         ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
 
-
         chose_menu_number = input()
-        table = data_manager.get_table_from_file('sales/sales.csv')
 
         is_menu_sales = True
         while is_menu_sales:
@@ -51,19 +50,33 @@ def start_module():
             if chose_menu_number == "1":
                 show_table(table)
                 is_menu_sales = False
+
             elif chose_menu_number == "2":
                 add(table)
                 is_menu_sales = False
+
             elif chose_menu_number == "3":
                 remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
                 is_menu_sales = False
+
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                is_menu_sales = False
+
             elif chose_menu_number == "5":
                 get_lowest_price_item_id(table)
-                
+
+
+
             elif chose_menu_number == "6":
-                get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+                questions_list = ['Enter initial month ', 'Enter initial day ', 'Enter initial year ',
+                                  'Enter final month ', 'Enter final day ', 'Enter final year ']
+
+                inputs_list = ui.get_inputs(questions_list, 'Enter a time')
+                get_items_sold_between(table, inputs_list[0], inputs_list[1], inputs_list[2], inputs_list[3],
+                                       inputs_list[4], inputs_list[5])
+                is_menu_sales = False
+
             elif chose_menu_number == "0":
                 is_menu_sales = False
                 is_not_main_menu = False
@@ -96,6 +109,7 @@ def add(table):
     """
     inputs = ['Enter title: ', 'Enter price: ',
     'Enter month: ', 'Enter day: ', 'Enter year: ']
+
     table = common.add_record(table, inputs)
 
     return table
@@ -128,8 +142,10 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    inputs = ['Enter title: ', 'Enter price: ',
+    'Enter month: ', 'Enter day: ', 'Enter year: ']
 
-    # your code
+    table = common.update_record(table, inputs, id_)
 
     return table
 
@@ -157,16 +173,23 @@ def get_lowest_price_item_id(table):
 
 
 
+
+
     # insertion sort to find descending alphabetical order longest name
-    for number in range (1, len(lowest_price)):
+    for number in range(1, len(lowest_price)):
+
         current_number = lowest_price[number]
         element = number - 1
 
         while element >= 0 and lowest_price[element] > current_number:
             lowest_price[element+1] = lowest_price[element]
+
             element -=1
 
         lowest_price[element+1] = current_number
+
+
+
 
 
     for row in table:
@@ -180,6 +203,23 @@ def get_lowest_price_item_id(table):
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
-    # your code
-
     pass
+    '''for number in range(1, len(lowest_price)):
+        current_number = lowest_price[number]
+        element = number - 1
+
+        while element >= 0 and lowest_price[element] > current_number:
+            lowest_price[element+1] = lowest_price[element]
+            element -= 1
+
+        lowest_price[element+1] = current_number'''
+
+    '''    for i in range(1, len(table)):
+        tmp = table[i][5]
+        number_2 = i
+        while number_2 > 0 and tmp < table[number_2 - 1]:
+            table[number_2] = table[number_2 - 1]
+            number_2 -= 1
+        table[number_2] = tmp
+        year_table_sorted.append(tmp)
+        print(year_table_sorted)'''

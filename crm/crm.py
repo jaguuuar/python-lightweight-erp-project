@@ -8,10 +8,6 @@
 
 # importing everything you need
 import os
-#import above is for test
-import sys
-sys.path.append('/home/sylwia/Codecool/TW_after_checkpoint1/TW6/python-lightweight-erp-project-do_you_even_code_bro')
-
 # User interface module
 import ui
 # data manager module
@@ -153,19 +149,18 @@ def update(table, id_):
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
 
-    #take from table column with names and add to customer_names list
+    # take from table column with names and add to customer_names list
 
-    customer_names=[table[i][1] for i in range(len(table))] #list with all names
+    customer_names = [table[i][1] for i in range(len(table))]  # list with all names
 
     name = ""
     for row in table:
         if len(row[1]) > len(name):
+
             len_list = [table[i][1] for i in range(len(table)) if len(row[1]) == len(table[i][1])] #list with the longest names
             name = row[1]
             #list with the longest names in big letters
             upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])] 
-
-
 
 
     #insertion sort to find descending alphabetical order longest name
@@ -193,13 +188,22 @@ def get_longest_name_id(table):
 
 
 
-# the question: Which customers has subscribed to the newsletter?
-# return type: list of strings (where string is like email+separator+name, separator=";")
+    # the question: Which customers has subscribed to the newsletter?
+    # return type: list of strings (where string is like email+separator+name, separator=";")
+
+
+
 def get_subscribed_emails(table):
+
 
     subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1'] #list with all id 1, 0
     
     return(subscribed_to_newsletter_list)
     
 
+
+
+    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']  # list with all id 1, 0
+
+    return(subscribed_to_newsletter_list)
 
