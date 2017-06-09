@@ -23,14 +23,15 @@ def generate_random(table):
         Random and unique string
     """
 
-    id_list=[]
+    id_list = []
     for record in table:
         id_list.append(record[0])
 
     while True:
+
         generated = []
         for i in range(2):
-            number = random.randint(0,9)
+            number = random.randint(0, 9)
             generated.append(str(number))
             upper = random.choice(string.ascii_uppercase)
             generated.append(upper)
@@ -48,10 +49,11 @@ def generate_random(table):
 
     return generated
 
+
 def add_record(table, inputs_list):
     new_id = generate_random(table)
     new_record = ui.get_inputs(inputs_list, 'Add new record')
-    new_record.insert(0,new_id)
+    new_record.insert(0, new_id)
     table.append(new_record)
 
     return table
@@ -69,7 +71,7 @@ def remove_record(table, id_):
 def update_record(table, inputs, id_):
     for record in table:
         if record[0] == ''.join(id_):
-            inputs_entered = ui.get_inputs(inputs,'Update your record')
+            inputs_entered = ui.get_inputs(inputs, 'Update your record')
             for element in range(len(inputs)):
                 record[element+1] = inputs_entered[element]
 

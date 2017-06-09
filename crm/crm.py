@@ -30,7 +30,7 @@ def start_module():
     is_not_main_menu = True
     while is_not_main_menu:
 
-        customer_relationship_managment_menu =[
+        customer_relationship_managment_menu = [
             "(1) Show table",
             "(2) Add",
             "(3) Remove",
@@ -82,8 +82,6 @@ def show_table(table):
         None
     """
 
-    # your code
-
     title_list = ['ID', 'NAME', 'EMAIL', 'SUBSCRIBED']
     ui.print_table(table, title_list)
 
@@ -98,8 +96,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter name: ', 'Enter email: ',
-    'Enter subscribed: ']
+    inputs = ['Enter name: ', 'Enter email: ', 'Enter subscribed: ']
     table = common.add_record(table, inputs)
 
     return table
@@ -132,8 +129,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter name: ', 'Enter email: ',
-    'Enter subscribed: ']
+    inputs = ['Enter name: ', 'Enter email: ', 'Enter subscribed: ']
 
     table = common.update_record(table, inputs, id_)
 
@@ -159,8 +155,6 @@ def get_longest_name_id(table):
             name = row[1]
             # list with the longest names in big letters
             upper_list = [table[i][1].upper() for i in range(len(table)) if len(row[1]) == len(table[i][1])]
-
-
 
     # insertion sort to find descending alphabetical order longest name
 

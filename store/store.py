@@ -98,8 +98,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter title: ', 'Enter manufacturer: ',
-    'Enter price: ', 'Enter in stock: ']
+    inputs = ['Enter title: ', 'Enter manufacturer: ', 'Enter price: ', 'Enter in stock: ']
 
     table = common.add_record(table, inputs)
 
@@ -133,8 +132,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter title: ', 'Enter manufacturer: ',
-    'Enter price: ', 'Enter in stock: ']
+    inputs = ['Enter title: ', 'Enter manufacturer: ', 'Enter price: ', 'Enter in stock: ']
 
     table = common.update_record(table, inputs, id_)
 

@@ -47,7 +47,6 @@ def start_module():
         is_menu_accounting = True
         while is_menu_accounting:
 
-
             if chose_menu_number == "1":
                 show_table(table)
                 is_menu_accounting = False
@@ -75,7 +74,6 @@ def start_module():
                 is_not_main_menu = False
 
 
-
 def show_table(table):
     """
     Display a table
@@ -96,12 +94,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter moth: ', 'Enter day: ',
-    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    inputs = ['Enter moth: ', 'Enter day: ', 'Enter year: ', 'Enter type: ', 'Enter amount: ']
     table = common.add_record(table, inputs)
 
     return table
     pass
+
 
 def remove(table, id_):
     """
@@ -118,7 +116,6 @@ def remove(table, id_):
     pass
 
 
-
 def update(table, id_):
     """
     Updates specified record in the table. Ask users for new data.
@@ -128,13 +125,11 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter moth: ', 'Enter day: ',
-    'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    inputs = ['Enter moth: ', 'Enter day: ', 'Enter year: ', 'Enter type: ', 'Enter amount: ']
 
     table = common.update_record(table, inputs, id_)
 
     return table
-
 
 
 # special functions:
@@ -148,16 +143,15 @@ def which_year_max(table):
     profit_values = []
     year_max = []
 
-
     for elements in table:
         if elements[3] not in profit:
-            profit.update({elements[3] : 0})
-            if elements [4] == "in":
+            profit.update({elements[3]: 0})
+            if elements[4] == "in":
                 profit[elements[3]] += (int(elements[5]))
             elif elements[4] == "out":
                 profit[elements[3]] += (-1 * int(elements[5]))
         elif elements[3] in profit:
-            if elements [4] == "in":
+            if elements[4] == "in":
                 profit[elements[3]] += (int(elements[5]))
             elif elements[4] == "out":
                 profit[elements[3]] += (-1 * int(elements[5]))
@@ -165,8 +159,8 @@ def which_year_max(table):
     for value in profit.values():
         profit_values.append(value)
 
-    for i in range(0,len(profit_values)-1):
-        for j in range(0,len(profit_values)-1-i):
+    for i in range(0, len(profit_values)-1):
+        for j in range(0, len(profit_values)-1-i):
             if profit_values[j] > profit_values[j+1]:
                 temp = profit_values[j]
                 profit_values[j] = profit_values[j+1]
@@ -191,13 +185,13 @@ def avg_amount(table, year):
 
     for elements in table:
             if elements[3] not in profit:
-                profit.update({elements[3] : 0})
-                if elements [4] == "in":
+                profit.update({elements[3]: 0})
+                if elements[4] == "in":
                     profit[elements[3]] += (int(elements[5]))
                 elif elements[4] == "out":
                     profit[elements[3]] += (-1 * int(elements[5]))
             elif elements[3] in profit:
-                if elements [4] == "in":
+                if elements[4] == "in":
                     profit[elements[3]] += (int(elements[5]))
                 elif elements[4] == "out":
                     profit[elements[3]] += (-1 * int(elements[5]))

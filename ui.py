@@ -1,4 +1,14 @@
-def make_table(table, title_list):
+def make_and_print_board(table, title_list):
+    """
+    This function find the longest word/ number lenght in every list of lists, than change all shorters
+
+    Args:
+        table: list of lists - table to display
+        title_list: list containing table headers
+
+    Returns:
+        This function doesn't return anything it only prints the board.
+    """
 
     table.insert(0, title_list)
     columns = len(table[0])
@@ -7,13 +17,15 @@ def make_table(table, title_list):
     longests = []
     columns_rows_with_whitespace = []
 
-    for i in range(0, columns):                             # make list with empty lists (it's depend on columns lenght)
+    # make list with empty lists (it's depend on columns lenght)
+    for i in range(0, columns):
         columns_rows.append([])
         columns_rows_with_whitespace.append([])
         for j in range(rows):
-            columns_rows[i].append(table[j][i])                                     # add cells from columns to one list
+            columns_rows[i].append(table[j][i])     # add cells from columns to one list
 
-    for i in range(len(columns_rows)):          # found longest string or number in column and add them to list longests
+    # found longest string or number in column and add them to list longests
+    for i in range(len(columns_rows)):
 
         highest = len(str(columns_rows[i][0]))
 
@@ -22,7 +34,8 @@ def make_table(table, title_list):
                 highest = len(str(element))
         longests.append(highest)
 
-    for i in range(len(columns_rows)):                                  # add whitespaces and '|' to strings/numbers
+    # add whitespaces and '|' to strings/numbers
+    for i in range(len(columns_rows)):
         for element in columns_rows[i]:
             len_difference = longests[i] - len(str(element))
             rounded_up = ' '*int(len_difference/2)
@@ -41,13 +54,15 @@ def make_table(table, title_list):
     for i in range(0, rows):
         back_to_rows.append([])
 
-    for i in range(len(back_to_rows)):                                      # back to list of lists where sublist is row
+    # back to list of lists where sublist is row
+    for i in range(len(back_to_rows)):
         for j in range(len(columns_rows_with_whitespace)):
             back_to_rows[i].append(columns_rows_with_whitespace[j][i])
 
     board_lines = []
 
-    for element in longests:                                            # make elements (lines with '-') beetween rows
+    # make elements (lines with '-') beetween rows
+    for element in longests:
         line = '-' + ((4+element) * '-') + '-'
         board_lines.append(line)
 
@@ -85,8 +100,8 @@ def print_table(table, title_list):
     Returns:
         This function doesn't return anything it only prints to console.
     """
-    # data = [titles] + list(zip(key, values))
-    make_table(table, title_list)
+
+    make_and_print_board(table, title_list)
     table.remove(table[0])
 
 
@@ -140,10 +155,10 @@ def print_menu(title, list_options, exit_message):
         This function doesn't return anything it only prints to console.
     """
 
-    #list options from menu without brackets
+    # list options from menu without brackets
     option_from_menu = ("\n ").join(list_options)
 
-    print(title, "\n" , option_from_menu, "\n" , exit_message)
+    print(title, "\n", option_from_menu, "\n", exit_message)
 
 
 def get_inputs(list_labels, title):
@@ -176,6 +191,8 @@ def get_inputs(list_labels, title):
 # This function displays an error message. (example: Error: @message)
 #
 # @message: string - the error message
+
+
 def print_error_message(message):
     """
     Displays an error message
@@ -187,34 +204,5 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
-
     message_error = "Error: @"
     print('{}{}'.format(message_error, message))
-
-    #print(message_error + "@" + message)
-
-    pass
-
-####################################################
-# TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
-
-
-def main():
-    '''table = [['1dsa', 'Janusz Kozlowski', 1922234, '123123'], ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 212],
-             ['dkllk7', 'AlbadasSadasd', 1929929921223, 'ewqwe'], ['dkllk798820', 'AlbadasSasdasadasd', 192992992122322, 'dasdsa'],
-             ['dakdjhkajhdw', 'Barbra Saasdatreid', 1991122, 123], ['dakdjhkajhdw', 'Barbra Saasdatreid', '1231', 1991122]]'''
-
-    title_list = ['ID', 'NAME', 'YEAR']
-
-    with open('sales/sales.csv', "r") as file:
-        lines = file.readlines()
-    table = [element.replace("\n", "").split(";") for element in lines]
-
-    print_table(table, title_list)
-
-
-#main()
-
-
-# TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!
-####################################################

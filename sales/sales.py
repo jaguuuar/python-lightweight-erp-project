@@ -32,7 +32,7 @@ def start_module():
     is_not_main_menu = True
     while is_not_main_menu:
 
-        sales_manager_menu =[
+        sales_manager_menu = [
             "(1) Show table",
             "(2) Add",
             "(3) Remove",
@@ -40,7 +40,7 @@ def start_module():
             "(5) Get lowest price item id",
             "(6) Get items sold between"]
 
-        ui.print_menu("Sales manager menu: ", sales_manager_menu , "(0) Back to main menu")
+        ui.print_menu("Sales manager menu: ", sales_manager_menu, "(0) Back to main menu")
 
         inputs = ui.get_inputs(['Choose option from menu '], '')
         chose_menu_number = inputs[0]
@@ -110,8 +110,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter title: ', 'Enter price: ',
-    'Enter month: ', 'Enter day: ', 'Enter year: ']
+    inputs = ['Enter title: ', 'Enter price: ', 'Enter month: ', 'Enter day: ', 'Enter year: ']
 
     table = common.add_record(table, inputs)
 
@@ -145,8 +144,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter title: ', 'Enter price: ',
-    'Enter month: ', 'Enter day: ', 'Enter year: ']
+    inputs = ['Enter title: ', 'Enter price: ', 'Enter month: ', 'Enter day: ', 'Enter year: ']
 
     table = common.update_record(table, inputs, id_)
 
@@ -160,6 +158,15 @@ def update(table, id_):
 # return type: string (id)
 # if there are more than one with the lowest price, return the first by descending alphabetical order
 def get_lowest_price_item_id(table):
+    """
+    Find lowest price item id from given table
+
+    Args:
+        table: list of lists (witch strings and ints)
+
+    Returns:
+        id_ : string
+    """
 
     lowest = int(table[0][2])
     lowest_price = []
@@ -195,6 +202,15 @@ def get_lowest_price_item_id(table):
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+    """
+    Find all records from table between given time
+
+    Args:
+        table: list of lists (witch strings and ints)
+
+    Returns:
+        id_ : string
+    """
 
     if len(str(day_from)) < 2:
         day_from = '0' + str(day_from)
@@ -208,9 +224,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     date_from = str(year_from) + str(month_from) + str(day_from)
     date_to = str(year_to) + str(month_to) + str(day_to)
 
-
     dict_with_all_rows = {}
     sorted_list = []
+
     for i in range(len(table)):
         if len(table[i][4]) < 2:
             table[i][4] = '0' + str(table[i][4])

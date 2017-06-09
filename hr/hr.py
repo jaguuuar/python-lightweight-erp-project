@@ -5,7 +5,7 @@
 # birth_date: number (year)
 
 
-# importing everything you need      ODKOMENTOWAC TE DOCSTRinGI!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# importing everything you need
 import os
 # User interface module
 import ui
@@ -68,7 +68,6 @@ def start_module():
             elif chose_menu_number == "0":
                 is_menu_hr = False
                 is_not_main_menu = False
-
 
 
 def show_table(table):
@@ -144,6 +143,15 @@ def update(table, id_):
 # the question: Who is the oldest person ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
+    """
+    Find oldest person/people from table
+
+    Args:
+        table: list of lists which contains id, person name and birth year
+
+    Returns:
+        oldest_people: list of strings (oldest people)
+    """
 
     oldest = int(table[0][2])
     oldest_people = []
@@ -165,6 +173,15 @@ def get_oldest_person(table):
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
+    """
+    Find person closest to the average age
+
+    Args:
+        table: list of lists which contains id, person name and birth year
+
+    Returns:
+        closest_to_average_age: list of strings (names people closest to average)
+    """
 
     summed_age = 0
     list_with_age = []
@@ -175,17 +192,17 @@ def get_persons_closest_to_average(table):
         list_with_age.append(element)
         summed_age += element
 
-
     average_age = round(summed_age/len(table))
 
+    closest_to_average = []
+    to_compare = abs(2017 - int(table[0][2]) - average_age)
 
     for i in range(len(list_with_age)):
         element = 2017 - int(table[i][2])
-        temp = abs(2017 - int(table[i][2]) - average_age)
+        temp = abs(element - average_age)
 
-        if element == average_age:
-            closest_to_average_age.append(table[i][1])
+        if temp < to_compare:
+            to_compare = temp
+            closest_to_average.append(table[i][1])
 
-        elif element > temp:
-            temp = element
-            closest_to_average_age.append(table[i][1])
+    return closest_to_average

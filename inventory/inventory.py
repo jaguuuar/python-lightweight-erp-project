@@ -31,7 +31,7 @@ def start_module():
     is_not_main_menu = True
     while is_not_main_menu:
 
-        inventory_manager_menu= [
+        inventory_manager_menu = [
             "(1) Show table",
             "(2) Add",
             "(3) Remove",
@@ -95,8 +95,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter name: ', 'Enter manufacturer: ',
-    'Enter purchase date: ', 'Enter durability: ']
+    inputs = ['Enter name: ', 'Enter manufacturer: ', 'Enter purchase date: ', 'Enter durability: ']
 
     table = common.add_record(table, inputs)
 
@@ -130,8 +129,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter name: ', 'Enter manufacturer: ',
-    'Enter purhase date: ','Enter durability: ']
+    inputs = ['Enter name: ', 'Enter manufacturer: ', 'Enter purhase date: ', 'Enter durability: ']
 
     table = common.update_record(table, inputs, id_)
 
@@ -146,13 +144,6 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_items(table):
-    '''available_items = []
-
-    for record in table:
-        exceed_year = int(record[3]) + int(record[4])
-        if exceed_year >= 2017:
-            available_items.append(record)
-    return available_items'''
 
     available_items = [table[i][:] for i in range(len(table)) if int(table[i][4]) >= 2017 - int(table[i][3])]
     for row in available_items:
@@ -165,7 +156,10 @@ def get_available_items(table):
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 #
 # @table: list of lists
+
+
 def get_average_durability_by_manufacturers(table):
+
     manufacturers = []
     for record in table:
         if record[2] not in manufacturers:
