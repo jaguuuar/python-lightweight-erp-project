@@ -56,6 +56,7 @@ def start_module():
                 is_menu_accounting = False
             elif chose_menu_number == "3":
                 remove(table, )
+                write_table_to_file(file_name, table)
                 is_menu_accounting = False
             elif chose_menu_number == "4":
                 update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
