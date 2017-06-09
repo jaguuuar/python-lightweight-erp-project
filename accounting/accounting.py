@@ -143,6 +143,20 @@ def update(table, id_):
 # return the answer (number)
 def which_year_max(table):
 
+    """
+    The function checks which year has the highest profit
+
+    Parameters:
+    ----------
+    table : list from file with id, date (month, day, year), information about type (income/outcome) and amount (number dollar)
+
+    Returns:
+    -------
+    year_max_number - int number
+
+    """
+
+
     profit = {}
     profit_values = []
     year_max = []
@@ -184,6 +198,22 @@ def which_year_max(table):
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
+
+    """
+    The function checks what is the average (per item) profit in a given year? [(profit)/(items count)]
+
+    Parameters:
+    ----------
+    table : list from file with id, date (month, day, year), information about type (income/outcome) and amount (number dollar)
+    year: ??????????????????????????????????????????
+
+    Returns:
+    -------
+    average_amount_per_item - int number
+
+    """
+
+
 
     profit = {}
     items_count = 0

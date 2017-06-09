@@ -149,6 +149,18 @@ def update(table, id_):
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
 
+    """
+    The function checks customer names by length and selects the longest. 
+
+    Parameters:
+    ----------
+    table : list from file with id, name, email and information about subscription selection 
+
+    Returns:
+    -------
+    id_: string with id of the longest name customer by ascending order
+
+    """
     # take from table column with names and add to customer_names list
 
     customer_names = [table[i][1] for i in range(len(table))]  # list with all names
@@ -195,15 +207,21 @@ def get_longest_name_id(table):
 
 def get_subscribed_emails(table):
 
+    """
+    The function checks which customer is subscribed to newsletter (1/0 = yes/not)
+
+    Parameters:
+    ----------
+    table : list from file with id, name, email and information about subscription selection
+
+    Returns:
+    -------
+    subscribed_to_newsletter_list - list of strings (where string is like email+separator+name, separator=";")
+
+    """
+
 
     subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1'] #list with all id 1, 0
-    
-    return(subscribed_to_newsletter_list)
-    
-
-
-
-    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']  # list with all id 1, 0
 
     return(subscribed_to_newsletter_list)
 
