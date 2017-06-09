@@ -30,7 +30,7 @@ def start_module():
 
     is_not_main_menu = True
     while is_not_main_menu:
-
+        data_manager.write_table_to_file('inventory/inventory.csv', table)
         inventory_manager_menu= [
             "(1) Show table",
             "(2) Add",

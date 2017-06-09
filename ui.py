@@ -178,24 +178,24 @@ def get_inputs(list_labels, title):
     # 9 - number from 0 to 6
 
     inputs = []
-    wrong_input = 'Wrong input! Enter again'
+    #wrong_input = print_error_message('Wrong input! Enter again')
     print(title)
     for enter_input in range(0, len(list_labels), 2):
         new_input = input(list_labels[enter_input])
         if len(list_labels) == 1:
             while not new_input.isdigit():
-                print(wrong_input)
+                print_error_message('Wrong input! Enter again')
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 1:
             while all (x.isspace() for x in new_input) or not all(x.isalpha() or x.isspace() for x in new_input):
-                print(wrong_input)
+                print_error_message('Wrong input! Enter again')
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 2:
             while True:
                 while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
-                    print(wrong_input)
+                    print_error_message('Wrong input! Enter again')
                     new_input = input(list_labels[enter_input])
                 if int(new_input) >= 0:
                     break
@@ -205,7 +205,7 @@ def get_inputs(list_labels, title):
         elif list_labels[enter_input + 1] == 3:
             while True:
                 while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
-                    print(wrong_input)
+                    print_error_message('Wrong input! Enter again')
                     new_input = input(list_labels[enter_input])
                 if int(new_input) < 2018:
                     break
@@ -215,7 +215,7 @@ def get_inputs(list_labels, title):
         elif list_labels[enter_input + 1] == 4:
             while True:
                 while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
-                    print(wrong_input)
+                    print_error_message('Wrong input! Enter again')
                     new_input = input(list_labels[enter_input])
                 if int(new_input) in range(1, 13):
                     break
@@ -225,7 +225,7 @@ def get_inputs(list_labels, title):
         elif list_labels[enter_input + 1] == 5:
             while True:
                 while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
-                    print(wrong_input)
+                    print_error_message('Wrong input! Enter again')
                     new_input = input(list_labels[enter_input])
                 if int(new_input) in range(1, 32):
                     break
@@ -234,23 +234,23 @@ def get_inputs(list_labels, title):
 
         elif list_labels[enter_input + 1] == 6:
             while all (x.isspace() for x in new_input):
-                print(wrong_input)
+                print_error_message('Wrong input! Enter again')
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 7:
             while not (new_input == 'in' or new_input == 'out'):
-                print(wrong_input)
+                print_error_message('Wrong input! Enter again')
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 8:
             while not (new_input == '1' or new_input == '0'):
-                print(wrong_input)
+                print_error_message('Wrong input! Enter again')
                 new_input = input(list_labels[enter_input])
 
         elif list_labels[enter_input + 1] == 9:
             while True:
                 while all (x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
-                    print(wrong_input)
+                    print_error_message('Wrong input! Enter again')
                     new_input = input(list_labels[enter_input])
                 if int(new_input) in range(0, 7):
                     break
@@ -281,7 +281,7 @@ def print_error_message(message):
 
     #print(message_error + "@" + message)
 
-    pass
+
 
 ####################################################
 # TEGO MAINA TUTAJ NIE MA! TYLKO DO CELOW TESTOWYCH!

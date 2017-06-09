@@ -167,7 +167,6 @@ def get_counts_by_manufacturers(table):
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
     manufacturer = "".join(manufacturer).rstrip()
-    print(manufacturer)
     stock_sum = 0
     game_count = 0
     for record in table:

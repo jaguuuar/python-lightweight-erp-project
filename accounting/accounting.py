@@ -96,7 +96,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter moth: ', 4, 'Enter day: ', 5,
+    inputs = ['Enter month: ', 4, 'Enter day: ', 5,
     'Enter year: ', 3, 'Enter type: ', 7, 'Enter amount: ', 2]
     table = common.add_record(table, inputs)
 
@@ -128,7 +128,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter moth: ', 4, 'Enter day: ', 5,
+    inputs = ['Enter month: ', 4, 'Enter day: ', 5,
     'Enter year: ', 3, 'Enter type: ', 7, 'Enter amount: ', 2]
 
     table = common.update_record(table, inputs, id_)

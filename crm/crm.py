@@ -40,7 +40,7 @@ def start_module():
 
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
-        inputs = ui.get_inputs(['Choose option from menu '], '')
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
         chose_menu_number = inputs[0]
 
         is_menu_crm = True
