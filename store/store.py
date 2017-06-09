@@ -30,6 +30,7 @@ def start_module():
     is_not_main_menu = True
     while is_not_main_menu:
 
+        data_manager.write_table_to_file('store/games.csv', table)
         store_manager_menu = [
             "(1) Show table",
             "(2) Add",
@@ -40,7 +41,7 @@ def start_module():
 
         ui.print_menu("Store manager menu: ", store_manager_menu, "(0) Back to main menu")
 
-        inputs = ui.get_inputs(['Choose option from menu '], '')
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
         chose_menu_number = inputs[0]
 
         is_menu_stores = True
@@ -53,17 +54,17 @@ def start_module():
                 add(table)
                 is_menu_stores = False
             elif chose_menu_number == "3":
-                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                remove(table, ui.get_inputs(['Enter id: ', 6], 'Remove record'))
                 is_menu_stores = False
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_stores = False
             elif chose_menu_number == "5":
                 result = get_counts_by_manufacturers(table)
                 ui.print_result(result, "Number of games that are available of each manufacturer: ")
                 is_menu_stores = False
             elif chose_menu_number == "6":
-                list_labels = ['Which manufacturer you want to check? ']
+                list_labels = ['Which manufacturer you want to check? ', 1]
                 manufacturer = ui.get_inputs(list_labels, 'One question for you! \n')
                 result = get_average_by_manufacturer(table, manufacturer)
                 ui.print_result(result, "Number of games that are available of each manufacturer: ")
@@ -98,7 +99,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter title: ', 'Enter manufacturer: ', 'Enter price: ', 'Enter in stock: ']
+    inputs = ['Enter title: ', 6, 'Enter manufacturer: ', 1, 'Enter price: ', 2, 'Enter in stock: ', 2]
 
     table = common.add_record(table, inputs)
 
@@ -132,7 +133,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter title: ', 'Enter manufacturer: ', 'Enter price: ', 'Enter in stock: ']
+    inputs = ['Enter title: ', 6, 'Enter manufacturer: ', 1, 'Enter price: ', 2, 'Enter in stock: ', 2]
 
     table = common.update_record(table, inputs, id_)
 
@@ -164,14 +165,18 @@ def get_counts_by_manufacturers(table):
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
+    manufacturer = "".join(manufacturer).rstrip()
     stock_sum = 0
     game_count = 0
     for record in table:
-        for manufacturer in record:
+        for element in record:
             if manufacturer in record:
                 stock_sum += int(record[4])
                 game_count += 1
 
-    average_games_in_stock = round(stock_sum / game_count, 2)
+    if game_count != 0 or stock_sum != 0:
+        average_games_in_stock = round(stock_sum / game_count, 2)
+    else:
+        average_games_in_stock = 'No games for this manufacturer'
 
     return average_games_in_stock

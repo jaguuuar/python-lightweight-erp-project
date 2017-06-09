@@ -30,7 +30,7 @@ def start_module():
 
     is_not_main_menu = True
     while is_not_main_menu:
-
+        data_manager.write_table_to_file('accounting/items.csv', table)
         accounting_manager_menu = [
             "(1) Show table",
             "(2) Add",
@@ -41,7 +41,7 @@ def start_module():
 
         ui.print_menu("Accounting manager menu: ", accounting_manager_menu, "(0) Back to main menu")
 
-        inputs = ui.get_inputs(['Choose option from menu '], '')
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
         chose_menu_number = inputs[0]
 
         is_menu_accounting = True
@@ -54,18 +54,19 @@ def start_module():
                 add(table)
                 is_menu_accounting = False
             elif chose_menu_number == "3":
-                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                remove(table, ui.get_inputs(['Enter id: ', 6], 'Remove record'))
                 is_menu_accounting = False
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_accounting = False
             elif chose_menu_number == "5":
                 result = which_year_max(table)
                 ui.print_result(result, 'Year with highest profit is: \n')
                 is_menu_accounting = False
             elif chose_menu_number == "6":
-                list_labels = ['Which year you want to check? ']
+                list_labels = ['Which year you want to check? ', 3]
                 year = ui.get_inputs(list_labels, 'One question for you! \n')
+                year = int(year[0])
                 result = avg_amount(table, year)
                 ui.print_result(result, 'Average durability by manufacturer: \n')
                 is_menu_accounting = False
@@ -94,11 +95,10 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter moth: ', 'Enter day: ', 'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    inputs = ['Enter moth: ', 4, 'Enter day: ', 5, 'Enter year: ', 3, 'Enter type: ', 7, 'Enter amount: ', 2]
     table = common.add_record(table, inputs)
 
     return table
-    pass
 
 
 def remove(table, id_):
@@ -113,7 +113,6 @@ def remove(table, id_):
     table = common.remove_record(table, id_)
 
     return table
-    pass
 
 
 def update(table, id_):
@@ -125,7 +124,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter moth: ', 'Enter day: ', 'Enter year: ', 'Enter type: ', 'Enter amount: ']
+    inputs = ['Enter moth: ', 4, 'Enter day: ', 5, 'Enter year: ', 3, 'Enter type: ', 7, 'Enter amount: ', 2]
 
     table = common.update_record(table, inputs, id_)
 
@@ -138,7 +137,18 @@ def update(table, id_):
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
 def which_year_max(table):
+    """
+    The function checks which year has the highest profit
 
+    Parameters:
+    ----------
+    table : list from file with id, date (month, day, year), information about type (income/outcome) and amount (number dollar)
+
+    Returns:
+    -------
+    year_max_number - int number
+
+    """
     profit = {}
     profit_values = []
     year_max = []
@@ -179,10 +189,22 @@ def which_year_max(table):
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
+    """
+    The function checks what is the average (per item) profit in a given year? [(profit)/(items count)]
 
+    Parameters:
+    ----------
+    table : list from file with id, date (month, day, year), information about type (income/outcome) and amount (number dollar)
+    year: it's input from the user
+
+    Returns:
+    -------
+    average_amount_per_item - int number
+
+    """
     profit = {}
     items_count = 0
-
+    year = int(year)
     for elements in table:
             if elements[3] not in profit:
                 profit.update({elements[3]: 0})
@@ -196,9 +218,8 @@ def avg_amount(table, year):
                 elif elements[4] == "out":
                     profit[elements[3]] += (-1 * int(elements[5]))
     for elements in table:
-        if year[0] in elements[3]:
+        if year == int(elements[3]):
             items_count += 1
 
-    average_amount_per_item = int((profit[year[0]]))/items_count
-
+    average_amount_per_item = int((profit[str(year)]))/items_count
     return average_amount_per_item

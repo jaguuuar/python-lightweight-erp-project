@@ -171,22 +171,107 @@ def get_inputs(list_labels, title):
         Name <user_input_1>
         Surname <user_input_2>
         Age <user_input_3>
-
     Args:
         list_labels: list of strings - labels of inputs
         title: title of the "input section"
-
     Returns:
         List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
+    # 1 - letters, spaces
+    # 2 - numbers > 0
+    # 3 - numbers under 2018 year
+    # 4 - numbers under 12 month
+    # 5 - numbers under 31 days
+    # 6 - numbers, letters
+    # 7 - in , out
+    # 8 - boolean 1 or 0
+    # 9 - number from 0 to 6
+
     inputs = []
 
     print(title)
-    for enter_input in list_labels:
-        inputs.append(input(enter_input))
+    for enter_input in range(0, len(list_labels), 2):
+        new_input = input(list_labels[enter_input])
+        if len(list_labels) == 1:
+            while not new_input.isdigit():
+                print_error_message('Wrong input! Enter again :)')
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 1:
+            while all(x.isspace() for x in new_input) or not all(x.isalpha() or x.isspace() for x in new_input):
+                print_error_message('Wrong input! Enter again :)')
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 2:
+            while True:
+                while all(x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print_error_message('Wrong input! Enter again :)')
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) >= 0:
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 3:
+            while True:
+                while all(x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print_error_message('Wrong input! Enter again :)')
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) < 2018:
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 4:
+            while True:
+                while all(x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print_error_message('Wrong input! Enter again :)')
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) in range(1, 13):
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 5:
+            while True:
+                while all(x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print_error_message('Wrong input! Enter again :)')
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) in range(1, 32):
+                    break
+                else:
+                    new_input += 's'
+
+        elif list_labels[enter_input + 1] == 6:
+            while all(x.isspace() for x in new_input):
+                print_error_message('Wrong input! Enter again :)')
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 7:
+            while not (new_input == 'in' or new_input == 'out'):
+                print_error_message('Wrong input! Enter again :)')
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 8:
+            while not (new_input == '1' or new_input == '0'):
+                print_error_message('Wrong input! Enter again :)')
+                new_input = input(list_labels[enter_input])
+
+        elif list_labels[enter_input + 1] == 9:
+            while True:
+                while all(x.isspace() for x in new_input) or not all(x.isdigit() for x in new_input):
+                    print_error_message('Wrong input! Enter again :)')
+                    new_input = input(list_labels[enter_input])
+                if int(new_input) in range(0, 7):
+                    break
+                else:
+                    new_input += 's'
+
+        inputs.append(new_input)
 
     return inputs
+
 
 # This function displays an error message. (example: Error: @message)
 #

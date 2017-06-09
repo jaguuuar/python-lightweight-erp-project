@@ -72,7 +72,7 @@ def update_record(table, inputs, id_):
     for record in table:
         if record[0] == ''.join(id_):
             inputs_entered = ui.get_inputs(inputs, 'Update your record')
-            for element in range(len(inputs)):
+            for element in range(int(len(inputs)/2)):
                 record[element+1] = inputs_entered[element]
 
     return table

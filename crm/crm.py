@@ -29,6 +29,7 @@ def start_module():
 
     is_not_main_menu = True
     while is_not_main_menu:
+        data_manager.write_table_to_file('crm/customers.csv', table)
 
         customer_relationship_managment_menu = [
             "(1) Show table",
@@ -40,7 +41,7 @@ def start_module():
 
         ui.print_menu("Customer relationship managment menu: ", customer_relationship_managment_menu, "(0) Back to main menu")
 
-        inputs = ui.get_inputs(['Choose option from menu '], '')
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
         chose_menu_number = inputs[0]
 
         is_menu_crm = True
@@ -53,10 +54,10 @@ def start_module():
                 add(table)
                 is_menu_crm = False
             elif chose_menu_number == "3":
-                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                remove(table, ui.get_inputs(['Enter id: ', 6], 'Remove record'))
                 is_menu_crm = False
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_crm = False
             elif chose_menu_number == "5":
                 result = get_longest_name_id(table)
@@ -96,7 +97,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter name: ', 'Enter email: ', 'Enter subscribed: ']
+    inputs = ['Enter name: ', 1, 'Enter email: ', 6, 'Enter subscribed: ', 8]
     table = common.add_record(table, inputs)
 
     return table
@@ -129,7 +130,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter name: ', 'Enter email: ', 'Enter subscribed: ']
+    inputs = ['Enter name: ', 1, 'Enter email: ', 6, 'Enter subscribed: ', 8]
 
     table = common.update_record(table, inputs, id_)
 
@@ -143,6 +144,18 @@ def update(table, id_):
 # the question: What is the id of the customer with the longest name ?
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
+    """
+    The function checks customer names by length and selects the longest.
+
+    Parameters:
+    ----------
+    table : list from file with id, name, email and information about subscription selection
+
+    Returns:
+    -------
+    id_: string with id of the longest name customer by ascending order
+
+    """
 
     # take from table column with names and add to customer_names list
 
@@ -180,7 +193,19 @@ def get_longest_name_id(table):
 
 
 def get_subscribed_emails(table):
+    """
+    The function checks which customer is subscribed to newsletter (1/0 = yes/not)
 
-    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']  # list with all id 1, 0
+    Parameters:
+    ----------
+    table : list from file with id, name, email and information about subscription selection
+
+    Returns:
+    -------
+    subscribed_to_newsletter_list - list of strings (where string is like email+separator+name, separator=";")
+
+    """
+    # list with all id 1, 0
+    subscribed_to_newsletter_list = [table[i][2] + ";" + table[i][1] for i in range(len(table)) if table[i][3] == '1']
 
     return(subscribed_to_newsletter_list)

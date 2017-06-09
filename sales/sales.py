@@ -31,6 +31,7 @@ def start_module():
 
     is_not_main_menu = True
     while is_not_main_menu:
+        data_manager.write_table_to_file('sales/sales.csv', table)
 
         sales_manager_menu = [
             "(1) Show table",
@@ -42,7 +43,7 @@ def start_module():
 
         ui.print_menu("Sales manager menu: ", sales_manager_menu, "(0) Back to main menu")
 
-        inputs = ui.get_inputs(['Choose option from menu '], '')
+        inputs = ui.get_inputs(['Choose option from menu ', 9], '')
         chose_menu_number = inputs[0]
 
         is_menu_sales = True
@@ -57,11 +58,11 @@ def start_module():
                 is_menu_sales = False
 
             elif chose_menu_number == "3":
-                remove(table, ui.get_inputs(['Enter id: '], 'Remove record'))
+                remove(table, ui.get_inputs(['Enter id: ', 6], 'Remove record'))
                 is_menu_sales = False
 
             elif chose_menu_number == "4":
-                update(table, ui.get_inputs(['Enter id: '], 'Update record'))
+                update(table, ui.get_inputs(['Enter id: ', 6], 'Update record'))
                 is_menu_sales = False
 
             elif chose_menu_number == "5":
@@ -71,8 +72,8 @@ def start_module():
                 is_menu_sales = False
 
             elif chose_menu_number == "6":
-                questions_list = ['Enter initial month ', 'Enter initial day ', 'Enter initial year ',
-                                  'Enter final month ', 'Enter final day ', 'Enter final year ']
+                questions_list = ['Enter initial month ', 4, 'Enter initial day ', 5, 'Enter initial year ', 3,
+                                  'Enter final month ', 4, 'Enter final day ', 5, 'Enter final year ', 3]
 
                 inputs_list = ui.get_inputs(questions_list, 'Enter a time')
                 result = get_items_sold_between(table, inputs_list[0], inputs_list[1], inputs_list[2], inputs_list[3],
@@ -110,7 +111,7 @@ def add(table):
     Returns:
         Table with a new record
     """
-    inputs = ['Enter title: ', 'Enter price: ', 'Enter month: ', 'Enter day: ', 'Enter year: ']
+    inputs = ['Enter title: ', 6, 'Enter price: ', 1, 'Enter month: ', 4, 'Enter day: ', 5, 'Enter year: ', 3]
 
     table = common.add_record(table, inputs)
 
@@ -144,7 +145,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    inputs = ['Enter title: ', 'Enter price: ', 'Enter month: ', 'Enter day: ', 'Enter year: ']
+    inputs = ['Enter title: ', 6, 'Enter price: ', 1, 'Enter month: ', 4, 'Enter day: ', 5, 'Enter year: ', 3]
 
     table = common.update_record(table, inputs, id_)
 
